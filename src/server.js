@@ -12,4 +12,5 @@ mongoose.connect('mongodb+srv://eloyaqui:a2s3d4@eloyaquidb-ynayq.mongodb.net/elo
 server.use(express.json());
 server.use(routes);
 
-server.listen(3333);
+const porta = process.env.PORT || 8080;
+server.listen(porta);
