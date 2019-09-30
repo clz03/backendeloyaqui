@@ -4,7 +4,7 @@ const routes = require('./routes');
 
 const server = express();
 
-mongoose.connect('mongodb+srv://eloyaqui:a2s3d4@eloyaquidb-ynayq.mongodb.net/eloyaquidb1?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser:true,
     useUnifiedTopology: true
 });
