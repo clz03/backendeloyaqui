@@ -4,6 +4,8 @@ const routes = require('./routes');
 
 const server = express();
 
+
+
 mongoose.connect(process.env.DATABASE_URI, {
     useNewUrlParser:true,
     useUnifiedTopology: true

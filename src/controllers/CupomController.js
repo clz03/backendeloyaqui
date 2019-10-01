@@ -8,6 +8,27 @@ module.exports = {
         return res.json(returnGet)
     },
 
+    async show(req, res){
+        const returnShow = await Cupom.find({ _id: req.params.id });
+        return res.json(returnShow)
+    },
+
+    async show(req, res){
+        const returnShow = await Cupom.find({ _id: req.params.id });
+        return res.json(returnShow)
+    },
+
+    async update(req, res){
+        const returnUpdate = await Cupom.updateOne({ _id: req.params.id },req.body);
+        return res.json(returnUpdate)
+    },
+
+    async delete(req, res){
+        const returnDel = await Cupom.deleteOne({ _id: req.params.id });
+        return res.json(returnDel)
+    },
+
+
     store(req, res) {
 
         const { nome, icon } = req.body;
