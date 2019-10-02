@@ -32,7 +32,6 @@ module.exports = {
             descr, 
             preco, 
             imagem, 
-            numero, 
             promocao, 
             idestabelecimento
         });
