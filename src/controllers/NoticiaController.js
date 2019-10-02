@@ -26,10 +26,10 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, data, imagem } = req.body;
+        const { titulo, descr, data, imagem } = req.body;
 
         const returnPost = Noticia.create({
-            nome,
+            titulo,
             descr,
             data,
             imagem
