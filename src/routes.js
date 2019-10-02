@@ -26,6 +26,12 @@ routes.get('/estabelecimentos/categoria/:id', EstabelecimentoController.showbyca
 routes.put('/estabelecimentos/:id', EstabelecimentoController.update);
 routes.delete('/estabelecimentos/:id', EstabelecimentoController.delete);
 
+routes.post('/noticias', NoticiaController.store);
+routes.get('/noticias', NoticiaController.index);
+routes.get('/noticias/:id', NoticiaController.show);
+routes.put('/noticias/:id', NoticiaController.update);
+routes.delete('/noticias/:id', NoticiaController.delete);
+
 routes.post('/produtos', ProdutoController.store);
 routes.get('/produtos', ProdutoController.index);
 routes.get('/produtos/:id', ProdutoController.show);
