@@ -4,7 +4,7 @@ module.exports = {
 
     async index(req, res){
 
-        const returnGet = await Cupom.find();
+        const returnGet = await Cupom.find().populate('idestabelecimento');
         return res.json(returnGet)
     },
 
