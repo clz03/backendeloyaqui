@@ -28,7 +28,7 @@ module.exports = {
 
         const { nome, descr, data, imagem } = req.body;
 
-        const returnPost = Cupom.create({
+        const returnPost = Noticia.create({
             nome,
             descr,
             data,
