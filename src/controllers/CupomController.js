@@ -13,11 +13,6 @@ module.exports = {
         return res.json(returnShow)
     },
 
-    async show(req, res){
-        const returnShow = await Cupom.find({ _id: req.params.id });
-        return res.json(returnShow)
-    },
-
     async update(req, res){
         const returnUpdate = await Cupom.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
@@ -31,7 +26,7 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, icon } = req.body;
+        const { validade, premio, expirado, idestabelecimento  } = req.body;
 
         const returnPost = Cupom.create({
             validade,

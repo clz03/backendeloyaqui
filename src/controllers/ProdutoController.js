@@ -13,11 +13,6 @@ module.exports = {
         return res.json(returnShow)
     },
 
-    async show(req, res){
-        const returnShow = await Produto.find({ _id: req.params.id });
-        return res.json(returnShow)
-    },
-
     async update(req, res){
         const returnUpdate = await Produto.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
