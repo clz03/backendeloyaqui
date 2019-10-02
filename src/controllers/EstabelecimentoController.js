@@ -13,8 +13,8 @@ module.exports = {
         return res.json(returnShow)
     },
 
-    async show(req, res){
-        const returnShow = await Estabelecimento.find({ _id: req.params.id });
+    async showbycat(req, res){
+        const returnShow = await Estabelecimento.find({ idcategoria: req.params.id });
         return res.json(returnShow)
     },
 

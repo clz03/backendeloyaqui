@@ -22,6 +22,7 @@ routes.delete('/cupons/:id', CupomController.delete);
 routes.post('/estabelecimentos', EstabelecimentoController.store);
 routes.get('/estabelecimentos', EstabelecimentoController.index);
 routes.get('/estabelecimentos/:id', EstabelecimentoController.show);
+routes.get('/estabelecimentos/categoria/:id', EstabelecimentoController.showbycat);
 routes.put('/estabelecimentos/:id', EstabelecimentoController.update);
 routes.delete('/estabelecimentos/:id', EstabelecimentoController.delete);
 
