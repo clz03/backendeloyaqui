@@ -4,6 +4,7 @@ const CupomController = require('./controllers/CupomController.js');
 const EstabelecimentoController = require('./controllers/EstabelecimentoController.js');
 const ProdutoController = require('./controllers/ProdutoController.js');
 const ServicoController = require('./controllers/ServicoController.js');
+const NoticiaController = require('./controllers/NoticiaController.js');
 
 const routes = express.Router();
 
