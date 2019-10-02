@@ -35,6 +35,16 @@ const EstabelecimentoSchema = new Schema({
     fone2: {
         type: String
     },
+    pedonline: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
+    plano: {
+        type: Number,
+        require: true,
+        default: 0
+    },
     email: {
         type: String
     },
@@ -47,6 +57,7 @@ const EstabelecimentoSchema = new Schema({
     whatsapp: {
         type: String
     },    
+    
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'

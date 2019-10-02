@@ -30,7 +30,7 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, imagemcapa, rua, numero, bairro, cep, fone1, fone2, email, facebook, instagram, whatsapp, idcategoria } = req.body;
+        const { nome, descr, imagemcapa, rua, numero, bairro, cep, fone1, fone2, pedonline, plano, email, facebook, instagram, whatsapp, idcategoria } = req.body;
 
         const returnPost = Estabelecimento.create({
             nome, 
@@ -42,6 +42,8 @@ module.exports = {
             cep, 
             fone1, 
             fone2, 
+            pedonline,
+            plano,
             email, 
             facebook, 
             instagram, 
