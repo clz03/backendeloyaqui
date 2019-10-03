@@ -18,6 +18,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbysearch(req, res){
+        const returnShow = await Estabelecimento.find({ nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' } });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Estabelecimento.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
