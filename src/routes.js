@@ -37,12 +37,14 @@ routes.delete('/noticias/:id', NoticiaController.delete);
 routes.post('/produtos', ProdutoController.store);
 routes.get('/produtos', ProdutoController.index);
 routes.get('/produtos/:id', ProdutoController.show);
+routes.get('/produtos/estabelecimento/:id', ProdutoController.showbyestab);
 routes.put('/produtos/:id', ProdutoController.update);
 routes.delete('/produtos/:id', ProdutoController.delete);
 
 routes.post('/servicos', ServicoController.store);
 routes.get('/servicos', ServicoController.index);
 routes.get('/servicos/:id', ServicoController.show);
+routes.get('/servicos/estabelecimento/:id', ServicoController.showbyestab);
 routes.put('/servicos/:id', ServicoController.update);
 routes.delete('/servicos/:id', ServicoController.delete);
 
