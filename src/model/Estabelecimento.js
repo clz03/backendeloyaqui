@@ -17,6 +17,9 @@ const EstabelecimentoSchema = new Schema({
         type: String,
         required: false
     },
+    imagem: {
+        type: String
+    },
     imagemcapa: {
         type: String
     },
