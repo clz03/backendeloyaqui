@@ -9,6 +9,14 @@ const EstabelecimentoSchema = new Schema({
         type: String,
         required: true
     },
+    tipo: {
+        type: String,
+        required: true
+    },
+    subtipo: {
+        type: String,
+        required: false
+    },
     imagemcapa: {
         type: String
     },

@@ -35,11 +35,13 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, imagemcapa, rua, numero, bairro, cep, fone1, fone2, pedonline, plano, email, facebook, instagram, whatsapp, idcategoria } = req.body;
+        const { nome, descr, tipo, subtipo, imagemcapa, rua, numero, bairro, cep, fone1, fone2, pedonline, plano, email, facebook, instagram, whatsapp, idcategoria } = req.body;
 
         const returnPost = Estabelecimento.create({
             nome, 
             descr, 
+            tipo,
+            subtipo,
             imagemcapa, 
             rua, 
             numero, 
