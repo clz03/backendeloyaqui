@@ -13,6 +13,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyestab(req, res){
+        const returnShow = await Cupom.find({ idestabelecimento: req.params.id });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Cupom.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
