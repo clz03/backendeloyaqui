@@ -20,10 +20,11 @@ module.exports = {
 
     async showbysearch(req, res){
         const returnShow = await Estabelecimento.find(
-            { 
-                nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }, 
-                tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' },
-                subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }
+            {  $or: [ 
+                    {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}, 
+                    {tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
+                    {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
+                ]
             }
         );
         return res.json(returnShow)
