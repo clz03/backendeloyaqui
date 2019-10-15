@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async show(req, res){
-        const returnShow = await Estabelecimento.find({ _id: req.params.id });
+        const returnShow = await Estabelecimento.findOne({ _id: req.params.id });
         return res.json(returnShow)
     },
 
@@ -19,7 +19,13 @@ module.exports = {
     },
 
     async showbysearch(req, res){
-        const returnShow = await Estabelecimento.find({ nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' } });
+        const returnShow = await Estabelecimento.find(
+            { 
+                nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }, 
+                tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' },
+                subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }
+            }
+        );
         return res.json(returnShow)
     },
 
