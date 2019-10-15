@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async show(req, res){
-        const returnShow = await Estabelecimento.findOne({ _id: req.params.id });
+        const returnShow = await Estabelecimento.find({ _id: req.params.id });
         return res.json(returnShow)
     },
 
