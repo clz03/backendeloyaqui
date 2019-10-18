@@ -3,8 +3,12 @@ const Noticia = require('../model/Noticia');
 module.exports = {
 
     async index(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
 
-        const returnGet = await Noticia.find();
+        const returnGet = await Noticia.find()
+        .skip((page -1) * pagination)
+        .limit(pagination);
         return res.json(returnGet)
     },
 
