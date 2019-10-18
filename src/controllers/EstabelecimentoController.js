@@ -18,7 +18,12 @@ module.exports = {
     },
 
     async showbycat(req, res){
-        const returnShow = await Estabelecimento.find({ idcategoria: req.params.id });
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+
+        const returnShow = await Estabelecimento.find({ idcategoria: req.params.id })
+        .skip((page -1) * pagination)
+        .limit(pagination);
         return res.json(returnShow)
     },
 
