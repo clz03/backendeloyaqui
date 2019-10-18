@@ -3,8 +3,12 @@ const Estabelecimento = require('../model/Estabelecimento');
 module.exports = {
 
     async index(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
 
-        const returnGet = await Estabelecimento.find();
+        const returnGet = await Estabelecimento.find()
+        .skip((page -1) * pagination)
+        .limit(pagination);
         return res.json(returnGet)
     },
 
