@@ -8,7 +8,8 @@ module.exports = {
 
         const returnGet = await Noticia.find()
         .skip((page -1) * pagination)
-        .limit(pagination);
+        .limit(pagination)
+        .sort({data: -1})
         return res.json(returnGet)
     },
 
