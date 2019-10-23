@@ -12,6 +12,11 @@ module.exports = {
         return res.json(returnGet)
     },
 
+    async showAll(req, res){
+        const returnShow = await Estabelecimento.find();
+        return res.json(returnShow)
+    },
+
     async show(req, res){
         const returnShow = await Estabelecimento.find({ _id: req.params.id });
         return res.json(returnShow)
