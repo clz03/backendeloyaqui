@@ -25,10 +25,10 @@ module.exports = {
     async showbycat(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
-        const totalCount = 0;
+        var totalCount = 0;
 
-        if (page == 1)
-        totalCount = await Estabelecimento.count({ idcategoria: req.params.id });
+        //if (page == 1)
+        totalCount = await Estabelecimento.countDocuments({ idcategoria: req.params.id });
 
         const returnShow = await Estabelecimento.find({ idcategoria: req.params.id })
         .skip((page -1) * pagination)
@@ -36,11 +36,10 @@ module.exports = {
 
         var result = {
             "totalRecords" : totalCount,
-            "result": res.json(returnShow)
+            "result": returnShow
         };
         
-        //return res.json(returnShow)
-        return result;
+        return res.json(result)
     },
 
     async showbysearch(req, res){
