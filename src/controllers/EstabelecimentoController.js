@@ -33,6 +33,9 @@ module.exports = {
     },
 
     async showbysearch(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+
         const returnShow = await Estabelecimento.find(
             {  $or: [ 
                     {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}, 
@@ -40,7 +43,9 @@ module.exports = {
                     {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
             }
-        );
+        )
+        .skip((page -1) * pagination)
+        .limit(pagination);
         return res.json(returnShow)
     },
 
