@@ -5,12 +5,21 @@ module.exports = {
     async index(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
+        var totalCount = 0;
+
+        totalCount = await Noticia.countDocuments();
 
         const returnGet = await Noticia.find()
         .skip((page -1) * pagination)
         .limit(pagination)
         .sort({data: -1})
-        return res.json(returnGet)
+
+        var result = {
+            "totalRecords" : totalCount,
+            "result": returnGet
+        };
+        
+        return res.json(result)
     },
 
     async show(req, res){

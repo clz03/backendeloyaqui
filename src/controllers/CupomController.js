@@ -3,9 +3,23 @@ const Cupom = require('../model/Cupom');
 module.exports = {
 
     async index(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+        var totalCount = 0;
 
-        const returnGet = await Cupom.find().populate('idestabelecimento');
-        return res.json(returnGet)
+        totalCount = await Cupom.countDocuments();
+
+        const returnGet = await Cupom.find().populate('idestabelecimento')
+        .skip((page -1) * pagination)
+        .limit(pagination)
+        .sort({data: -1});
+
+        var result = {
+            "totalRecords" : totalCount,
+            "result": returnGet
+        };
+        
+        return res.json(result)
     },
 
     async show(req, res){
