@@ -26,10 +26,22 @@ module.exports = {
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
 
+        if (page = 1)
+        const totalCount = await Estabelecimento.count({ idcategoria: req.params.id });
+        else
+        const totalCount = 0;
+
         const returnShow = await Estabelecimento.find({ idcategoria: req.params.id })
         .skip((page -1) * pagination)
         .limit(pagination);
-        return res.json(returnShow)
+
+        var result = {
+            "totalRecords" : totalCount,
+            "result": res.json(returnShow)
+        };
+        
+        //return res.json(returnShow)
+        return result;
     },
 
     async showbysearch(req, res){
