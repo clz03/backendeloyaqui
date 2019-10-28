@@ -25,11 +25,10 @@ module.exports = {
     async showbycat(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
-
-        if (page = 1)
-        const totalCount = await Estabelecimento.count({ idcategoria: req.params.id });
-        else
         const totalCount = 0;
+
+        if (page == 1)
+        totalCount = await Estabelecimento.count({ idcategoria: req.params.id });
 
         const returnShow = await Estabelecimento.find({ idcategoria: req.params.id })
         .skip((page -1) * pagination)
