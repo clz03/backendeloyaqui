@@ -7,6 +7,13 @@ const UsuarioSchema = new Schema({
     },
     nome: {
         type: String
+    },
+    tipo: {
+        type: String
+    },
+    idestabelecimento: {
+        type: Schema.Types.ObjectId,
+        ref: 'Estabelecimento'
     }
 }, {
     timestamps: true

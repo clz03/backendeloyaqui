@@ -24,11 +24,13 @@ module.exports = {
     },
 
     store(req, res) {
-        const { email, nome } = req.body;
+        const { email, nome, tipo, idestabelecimento } = req.body;
 
         const returnPost = Usuario.create({
             email,
-            nome
+            nome,
+            tipo,
+            idestabelecimento
         });
 
         return res.json(returnPost);
