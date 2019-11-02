@@ -6,6 +6,7 @@ const ProdutoController = require('./controllers/ProdutoController.js');
 const ServicoController = require('./controllers/ServicoController.js');
 const NoticiaController = require('./controllers/NoticiaController.js');
 const UsuarioController = require('./controllers/UsuarioController.js');
+const AdministradorController = require('./controllers/AdministradorController.js');
 
 const routes = express.Router();
 
@@ -56,5 +57,11 @@ routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
 routes.put('/usuarios/:id', UsuarioController.update);
 routes.delete('/usuarios/:id', UsuarioController.delete);
+
+routes.post('/administradores', AdministradorController.store);
+routes.get('/administradores', AdministradorController.index);
+routes.get('/administradores/:id', AdministradorController.show);
+routes.put('/administradores/:id', AdministradorController.update);
+routes.delete('/administradores/:id', AdministradorController.delete);
 
 module.exports = routes;

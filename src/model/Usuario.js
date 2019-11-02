@@ -5,15 +5,16 @@ const UsuarioSchema = new Schema({
         type: String,
         required: true
     },
+    pwd: {
+        type: String,
+        required: true
+    },
+    validado: {
+        type: Boolean,
+        required: true
+    },
     nome: {
         type: String
-    },
-    tipo: {
-        type: String
-    },
-    idestabelecimento: {
-        type: Schema.Types.ObjectId,
-        ref: 'Estabelecimento'
     }
 }, {
     timestamps: true
