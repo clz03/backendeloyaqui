@@ -13,6 +13,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyEmail(req, res){
+        const returnShow = await Usuario.countDocuments({ email: req.params.email });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Usuario.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)

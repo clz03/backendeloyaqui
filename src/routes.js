@@ -55,6 +55,7 @@ routes.delete('/servicos/:id', ServicoController.delete);
 routes.post('/usuarios', UsuarioController.store);
 routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
+routes.get('/usuarios/:email', UsuarioController.showbyEmail);
 routes.put('/usuarios/:id', UsuarioController.update);
 routes.delete('/usuarios/:id', UsuarioController.delete);
 
