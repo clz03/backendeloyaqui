@@ -46,9 +46,9 @@ module.exports = {
         const page = req.query.page ? parseInt(req.query.page) : 1;
         var totalCount = 0;
 
-        totalCount = await Estabelecimento.countDocuments({ pedonline: 1 });
+        totalCount = await Estabelecimento.countDocuments({ pedonline: '1' });
 
-        const returnShow = await Estabelecimento.find({ pedonline: 1 })
+        const returnShow = await Estabelecimento.find({ pedonline: '1' })
         .skip((page -1) * pagination)
         .limit(pagination);
 
@@ -67,7 +67,7 @@ module.exports = {
 
         totalCount = await Estabelecimento.countDocuments(
             {  $or: [ 
-                    {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}, 
+                    {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
                     {tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
                     {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
