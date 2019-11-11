@@ -67,8 +67,25 @@ const EstabelecimentoSchema = new Schema({
     },
     whatsapp: {
         type: String
-    },    
-    
+    },
+    hrinicio_semana: {
+        type: Number
+    },
+    hrfim_semana: {
+        type: Number
+    },
+    hrinicio_sabado: {
+        type: Number
+    },
+    hrfim_sabado: {
+        type: Number
+    },
+    hrinicio_domingo: {
+        type: Number
+    },
+    hrfrim_domingo: {
+        type: Number
+    },
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'
