@@ -83,7 +83,7 @@ const EstabelecimentoSchema = new Schema({
     hrinicio_domingo: {
         type: Number
     },
-    hrfrim_domingo: {
+    hrfim_domingo: {
         type: Number
     },
     idcategoria: [{
