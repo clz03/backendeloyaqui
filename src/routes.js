@@ -7,6 +7,7 @@ const ServicoController = require('./controllers/ServicoController.js');
 const NoticiaController = require('./controllers/NoticiaController.js');
 const UsuarioController = require('./controllers/UsuarioController.js');
 const AdministradorController = require('./controllers/AdministradorController.js');
+const EventoController = require('./controllers/EventoController.js');
 
 const routes = express.Router();
 
@@ -57,6 +58,7 @@ routes.post('/usuarios', UsuarioController.store);
 routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
 routes.get('/usuarios/email/:email', UsuarioController.showbyEmail);
+routes.get('/usuarios/authenticate', UsuarioController.authenticate);
 routes.put('/usuarios/:id', UsuarioController.update);
 routes.delete('/usuarios/:id', UsuarioController.delete);
 
@@ -65,5 +67,12 @@ routes.get('/administradores', AdministradorController.index);
 routes.get('/administradores/:id', AdministradorController.show);
 routes.put('/administradores/:id', AdministradorController.update);
 routes.delete('/administradores/:id', AdministradorController.delete);
+
+routes.post('/eventos', EventoController.store);
+routes.get('/eventos', EventoController.index);
+routes.get('/eventos/:id', EventoController.show);
+routes.get('/eventos/dia/:data', EventoController.showbyday);
+routes.put('/eventos/:id', EventoController.update);
+routes.delete('/eventos/:id', EventoController.delete);
 
 module.exports = routes;

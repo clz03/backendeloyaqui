@@ -13,6 +13,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyday(req, res){
+        const returnShow = await Evento.find({ data: req.params.data });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Evento.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
@@ -24,14 +29,14 @@ module.exports = {
     },
 
     store(req, res) {
-        const { start, end, title, summary, idestabelecimento } = req.body;
+        const { data, hora, comentario, idestabelecimento, idusuario } = req.body;
 
         const returnPost = Evento.create({
-            start,
-            end,
-            title,
-            summary,
-            idestabelecimento
+            data,
+            hora,
+            comentario,
+            idestabelecimento,
+            idusuario
         });
 
         return res.json(returnPost);

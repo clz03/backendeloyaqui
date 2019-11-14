@@ -1,24 +1,25 @@
 const { Schema, model} = require('mongoose');
 
 const EventoSchema = new Schema({
-    start: {
+    data: {
         type: Date,
         required: true
     },
-    end: {
+    hora: {
         type: Date,
         required: true
     },
-    title: {
+    comentario: {
         type: String,
         required: true
-    },
-    summary: {
-        type: String
     },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
+    },
+    idusuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario'
     }
 }, {
     timestamps: true

@@ -14,6 +14,20 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async authenticate(req, res){
+        const { email, senha } = req.body;
+
+        const user = await await Usuario.findOne({ email });
+
+        if (!user)
+            return res.status(400).send({ error: "Usuario nao encontrado"});
+
+        if (senha != user.senha)
+            return res.status(400).send({ error: "Senha inválida"});
+
+        return res.json(user)
+    },
+
     async showbyEmail(req, res){
         const returnShow = await Usuario.countDocuments({ email: req.params.email });
         return res.json(returnShow)
@@ -39,8 +53,6 @@ module.exports = {
             nome
         });
 
-        console.log('Post feito', res.json(returnPost));
-
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
             port: 2525,
@@ -50,8 +62,6 @@ module.exports = {
             }
         });
 
-        console.log('Transporter feito');
-
         let info = await transporter.sendMail({
             from: '"EloyAqui 👻" <noreply@eloyaqui.com.br>', // sender address
             to: email, // list of receivers
@@ -59,15 +69,6 @@ module.exports = {
             text: 'Termine seu cadastro efetuando a confirmação', // plain text body
             html: '<b>do seu email</b>' // html body
         });
-
-        console.log('email enviado feito');
-
-        console.log('Message sent: %s', info.messageId);
-        // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 
     },
 };
