@@ -5,10 +5,10 @@ const cors = require('cors');
 
 const server = express();
 
-mongoose.connect(process.env.DATABASE_URI, {
-    useNewUrlParser:true,
-    useUnifiedTopology: true
-});
+ mongoose.connect(process.env.DATABASE_URI, {
+     useNewUrlParser:true,
+     useUnifiedTopology: true
+ });
 
 server.use(cors());
 server.use(express.json());

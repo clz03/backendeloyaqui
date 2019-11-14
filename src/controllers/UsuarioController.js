@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 module.exports = {
 
     async index(req, res){
-
+        console.log(req.body);
         const returnGet = await Usuario.find();
         return res.json(returnGet)
     },
@@ -15,15 +15,24 @@ module.exports = {
     },
 
     async authenticate(req, res){
+
+        console.log(req.body);
+
         const { email, senha } = req.body;
 
+        console.log(email);
+
         const user = await Usuario.findOne({ email });
+
+        console.log(user);
 
         if (!user)
             return res.status(400).send({ error: "Usuario nao encontrado"});
 
-        if (senha != user.senha)
+        if (senha != user.pwd)
             return res.status(400).send({ error: "Senha inválida"});
+
+        user.pwd = undefined;
 
         return res.json(user)
     },

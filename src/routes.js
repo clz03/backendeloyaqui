@@ -58,7 +58,7 @@ routes.post('/usuarios', UsuarioController.store);
 routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
 routes.get('/usuarios/email/:email', UsuarioController.showbyEmail);
-routes.get('/usuarios/authenticate', UsuarioController.authenticate);
+routes.get('/authenticate', UsuarioController.authenticate);
 routes.put('/usuarios/:id', UsuarioController.update);
 routes.delete('/usuarios/:id', UsuarioController.delete);
 
