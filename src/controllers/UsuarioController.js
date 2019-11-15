@@ -16,15 +16,9 @@ module.exports = {
 
     async authenticate(req, res){
 
-        console.log(req.body);
-
         const { email, senha } = req.body;
 
-        console.log(email);
-
         const user = await Usuario.findOne({ email });
-
-        console.log(user);
 
         if (!user)
             return res.status(400).send({ error: "Usuario nao encontrado"});
