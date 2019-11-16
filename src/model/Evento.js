@@ -6,7 +6,7 @@ const EventoSchema = new Schema({
         required: true
     },
     hora: {
-        type: Date,
+        type: Number,
         required: true
     },
     comentario: {
