@@ -4,13 +4,17 @@ const Estabelecimento = require('../model/Estabelecimento');
 module.exports = {
 
     async index(req, res){
-
         const returnGet = await Evento.find();
         return res.json(returnGet)
     },
 
     async show(req, res){
         const returnShow = await Evento.find({ _id: req.params.id });
+        return res.json(returnShow)
+    },
+
+    async showbyuser(req, res){
+        const returnShow = await Evento.find({ idusuario: req.params.idusuario });
         return res.json(returnShow)
     },
 

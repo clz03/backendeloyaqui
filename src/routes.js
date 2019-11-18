@@ -72,6 +72,7 @@ routes.delete('/administradores/:id', AdministradorController.delete);
 routes.post('/eventos', EventoController.store);
 routes.get('/eventos', EventoController.index);
 routes.get('/eventos/:id', EventoController.show);
+routes.get('/eventos/usuario/:idusuario', EventoController.showbyuser);
 routes.get('/eventos/dia/:data/:estab', EventoController.showbyday);
 routes.put('/eventos/:id', EventoController.update);
 routes.delete('/eventos/:id', EventoController.delete);
