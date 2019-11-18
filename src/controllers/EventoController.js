@@ -33,6 +33,7 @@ module.exports = {
                 var status = jsonEventos.includes(i) ? 'I' : 'D';
                 jsonArr.push({
                     id: req.params.data + i,
+                    data: req.params.data,
                     hora: i,
                     status: status
                 });
@@ -44,6 +45,7 @@ module.exports = {
                 var status = jsonEventos.includes(i) ? 'I' : 'D';
                 jsonArr.push({
                     id: req.params.data + i,
+                    data: req.params.data,
                     hora: i,
                     status: status
                 });
@@ -55,17 +57,12 @@ module.exports = {
                 var status = jsonEventos.includes(i) ? 'I' : 'D';
                 jsonArr.push({
                     id: req.params.data + i,
+                    data: req.params.data,
                     hora: i,
                     status: status
                 });
             }
         }
-
-        //diasemana
-        //if 0 = domingo (hrinicio_domingo)
-        //if >0 and <6 = dia semana (hrinicio_semana)
-        //if 6 = sabado 9 (hrinicio_sabado)
-
 
         return res.json(jsonArr)
     },
