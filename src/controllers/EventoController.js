@@ -14,7 +14,7 @@ module.exports = {
     },
 
     async showbyuser(req, res){
-        const returnShow = await Evento.find({ idusuario: req.params.idusuario });
+        const returnShow = await Evento.find({ idusuario: req.params.idusuario }).populate('idestabelecimento');
         return res.json(returnShow)
     },
 
