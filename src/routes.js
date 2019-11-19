@@ -8,6 +8,7 @@ const NoticiaController = require('./controllers/NoticiaController.js');
 const UsuarioController = require('./controllers/UsuarioController.js');
 const AdministradorController = require('./controllers/AdministradorController.js');
 const EventoController = require('./controllers/EventoController.js');
+const UserCupomController = require('./controllers/UserCupomController.js');
 
 const routes = express.Router();
 
@@ -76,5 +77,12 @@ routes.get('/eventos/usuario/:idusuario', EventoController.showbyuser);
 routes.get('/eventos/dia/:data/:estab', EventoController.showbyday);
 routes.put('/eventos/:id', EventoController.update);
 routes.delete('/eventos/:id', EventoController.delete);
+
+routes.post('/usercupons', UserCupomController.store);
+routes.get('/usercupons', UserCupomController.index);
+routes.get('/usercupons/:id', UserCupomController.show);
+routes.get('/usercupons/usuario/:id', UserCupomController.showbyuser);
+routes.put('/usercupons/:id', UserCupomController.update);
+routes.delete('/usercupons/:id', UserCupomController.delete);
 
 module.exports = routes;
