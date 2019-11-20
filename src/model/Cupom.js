@@ -9,6 +9,9 @@ const CupomSchema = new Schema({
         type: String,
         required: true
     },
+    regra: {
+        type: String
+    },
     expirado: {
         type: Boolean
     },

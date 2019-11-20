@@ -45,11 +45,12 @@ module.exports = {
 
     store(req, res) {
 
-        const { validade, premio, expirado, idestabelecimento  } = req.body;
+        const { validade, premio, regra, expirado, idestabelecimento  } = req.body;
 
         const returnPost = Cupom.create({
             validade,
             premio,
+            regra,
             expirado,
             idestabelecimento
         });
