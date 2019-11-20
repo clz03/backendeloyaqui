@@ -4,12 +4,12 @@ module.exports = {
 
     async index(req, res){
 
-        const returnGet = await Produto.find().populate('idestabelecimento');;
+        const returnGet = await Produto.find().populate('idestabelecimento');
         return res.json(returnGet)
     },
 
     async show(req, res){
-        const returnShow = await Produto.find({ _id: req.params.id }).populate('idestabelecimento');;
+        const returnShow = await Produto.find({ _id: req.params.id }).populate('idestabelecimento');
         return res.json(returnShow)
     },
 

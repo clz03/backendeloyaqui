@@ -13,7 +13,7 @@ module.exports = {
     },
 
     async showbyuser(req, res){
-        const returnShow = await UserCupom.find({ idusuario: req.params.id }).populate('idcupom');;
+        const returnShow = await UserCupom.find({ idusuario: req.params.id }).populate('idcupom').populate('idestabelecimento');
         return res.json(returnShow)
     },
 
