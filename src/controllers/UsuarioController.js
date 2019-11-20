@@ -78,11 +78,13 @@ module.exports = {
     async store(req, res) {
         const { email, pwd, validado, nome } = req.body;
 
-        const returnPost = Usuario.create({
+        Usuario.create({
             email,
             pwd,
             validado,
             nome
+        }, function(err, docsInserted){
+            return docsInserted;
         });
 
         let transporter = nodemailer.createTransport({
@@ -102,7 +104,7 @@ module.exports = {
             html: '<b>do seu email</b>' // html body
         });
 
-        return res.json(returnPost)
+        
 
     },
 };
