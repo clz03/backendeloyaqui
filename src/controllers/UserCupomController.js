@@ -28,11 +28,12 @@ module.exports = {
     },
 
     store(req, res) {
-        const { idusuario, idcupom, utilizado } = req.body;
+        const { idusuario, idcupom, idestabelecimento, utilizado } = req.body;
 
         const returnPost = UserCupom.create({
             idusuario,
             idcupom,
+            idestabelecimento,
             utilizado
         });
 

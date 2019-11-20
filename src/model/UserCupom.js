@@ -9,6 +9,10 @@ const UserCupomSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Cupom'
     },
+    idestabelecimento: {
+        type: Schema.Types.ObjectId,
+        ref: 'Estabelecimento'
+    },
     utilizado: {
         type: Boolean
     }
