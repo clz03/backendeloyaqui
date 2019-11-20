@@ -1,5 +1,6 @@
 const Usuario = require('../model/Usuario');
 const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
 
 module.exports = {
 
@@ -49,12 +50,17 @@ module.exports = {
             }
         });
 
+        transporter.use('compile',hbs({
+            viewEngine: 'express-handlebars',
+            viewPah: '../views/'
+        }));
+
         let info = await transporter.sendMail({
-            from: '"EloyAqui 👻" <noreply@eloyaqui.com.br>', // sender address
+            from: '"EloyAqui" <noreply@eloyaqui.com.br>', // sender address
             to: email, // list of receivers
             subject: 'Redefinicao da sua senha ✔', // Subject line
             text: 'Redefina seu cadastro efetuando a confirmação', // plain text body
-            html: '<b>do seu email</b>' // html body
+            template: 'index'
         });
 
         return res.status(200).send({ error: "Email enviado"});
@@ -88,7 +94,6 @@ module.exports = {
           docs = doc;
         });
 
-
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
             port: 2525,
@@ -98,12 +103,30 @@ module.exports = {
             }
         });
 
+        const options = {
+            viewEngine: {
+              extName: ".handlebars",
+              partialsDir: './views/',
+              defaultLayout: false
+            },
+            viewPath: './views/',
+            extName: ".handlebars"
+          };
+
+        transporter.use('compile',hbs(options));
+
         let info = await transporter.sendMail({
-            from: '"EloyAqui 👻" <noreply@eloyaqui.com.br>', // sender address
+            from: '"EloyAqui" <noreply@eloyaqui.com.br>', // sender address
             to: email, // list of receivers
             subject: 'Confirme seu e-mail ✔', // Subject line
             text: 'Termine seu cadastro efetuando a confirmação', // plain text body
-            html: '<b>do seu email</b>' // html body
+            template: 'index',
+            context: {
+                nome : nome,
+                action_url: '',
+                whatsapp: '+5511976023836'
+
+           }
         });
 
         return res.json(docs)

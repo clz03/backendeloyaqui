@@ -5,10 +5,15 @@ const cors = require('cors');
 
 const server = express();
 
-  mongoose.connect(process.env.DATABASE_URI, {
-      useNewUrlParser:true,
-      useUnifiedTopology: true
-  });
+  // mongoose.connect(process.env.DATABASE_URI, {
+  //     useNewUrlParser:true,
+  //     useUnifiedTopology: true
+  // });
+
+  mongoose.connect('mongodb+srv://eloyaqui:a2s3d4@eloyaquidb-ynayq.mongodb.net/eloyaquidb1?retryWrites=true&w=majority', {
+    useNewUrlParser:true,
+    useUnifiedTopology: true
+});
 
 server.use(cors());
 server.use(express.json());
