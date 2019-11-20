@@ -60,6 +60,7 @@ routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
 routes.get('/usuarios/email/:email', UsuarioController.showbyEmail);
 routes.post('/authenticate', UsuarioController.authenticate);
+routes.post('/forgotpwd', UsuarioController.forgotpwd);
 routes.put('/usuarios/:id', UsuarioController.update);
 routes.delete('/usuarios/:id', UsuarioController.delete);
 

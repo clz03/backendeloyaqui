@@ -31,6 +31,35 @@ module.exports = {
         return res.json(user)
     },
 
+    async forgotpwd(req, res){
+
+        const { email } = req.body;
+
+        const user = await Usuario.findOne({ email });
+
+        if (!user)
+            return res.status(400).send({ error: "Usuario nao encontrado"});
+
+        let transporter = nodemailer.createTransport({
+            host: "smtp.mailtrap.io",
+            port: 2525,
+            auth: {
+                user: "cb617fac631548",
+                pass: "e6242a10de30be"
+            }
+        });
+
+        let info = await transporter.sendMail({
+            from: '"EloyAqui 👻" <noreply@eloyaqui.com.br>', // sender address
+            to: email, // list of receivers
+            subject: 'Redefinicao da sua senha ✔', // Subject line
+            text: 'Redefina seu cadastro efetuando a confirmação', // plain text body
+            html: '<b>do seu email</b>' // html body
+        });
+
+        return res.status(200).send({ error: "Email enviado"});
+    },
+
     async showbyEmail(req, res){
         const returnShow = await Usuario.countDocuments({ email: req.params.email });
         return res.json(returnShow)
