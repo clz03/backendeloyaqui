@@ -77,15 +77,17 @@ module.exports = {
 
     async store(req, res) {
         const { email, pwd, validado, nome } = req.body;
+        var docs;
 
-        Usuario.create({
+        const returnStore = Usuario.create({
             email,
             pwd,
             validado,
             nome
-        }, function(err, docsInserted){
-            return docsInserted;
+        }, function(error,doc) {
+          docs = doc;
         });
+
 
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
@@ -104,7 +106,7 @@ module.exports = {
             html: '<b>do seu email</b>' // html body
         });
 
-        
+        return res.json(docs)
 
     },
 };
