@@ -102,5 +102,7 @@ module.exports = {
             html: '<b>do seu email</b>' // html body
         });
 
+        return res.json(returnPost)
+
     },
 };
