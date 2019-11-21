@@ -23,7 +23,7 @@ module.exports = {
         var jsonEventos = [];
         const dia = new Date(req.params.data);
         const diasemana = dia.getDay();
-        const returnEventos = await Evento.find({ data: req.params.data });
+        const returnEventos = await Evento.find({ data: req.params.data, idestabelecimento: req.params.estab });
         const returnSlots = await Estabelecimento.findById({ _id: req.params.estab });
 
         if (returnEventos.length > 0){
