@@ -5,7 +5,6 @@ const hbs = require('nodemailer-express-handlebars');
 module.exports = {
 
     async index(req, res){
-        console.log(req.body);
         const returnGet = await Usuario.find();
         return res.json(returnGet)
     },
@@ -18,7 +17,6 @@ module.exports = {
     async authenticate(req, res){
 
         const { email, senha } = req.body;
-
         const user = await Usuario.findOne({ email });
 
         if (!user)
@@ -28,14 +26,12 @@ module.exports = {
             return res.status(400).send({ error: "Senha inválida"});
 
         user.pwd = undefined;
-
         return res.json(user)
     },
 
     async forgotpwd(req, res){
 
         const { email } = req.body;
-
         const user = await Usuario.findOne({ email });
 
         if (!user)
@@ -50,20 +46,32 @@ module.exports = {
             }
         });
 
-        transporter.use('compile',hbs({
-            viewEngine: 'express-handlebars',
-            viewPah: '../views/'
-        }));
+        const options = {
+            viewEngine: {
+              extName: ".handlebars",
+              partialsDir: './views/',
+              defaultLayout: false
+            },
+            viewPath: './views/',
+            extName: ".handlebars"
+          };
 
-        let info = await transporter.sendMail({
-            from: '"EloyAqui" <noreply@eloyaqui.com.br>', // sender address
-            to: email, // list of receivers
-            subject: 'Redefinicao da sua senha ✔', // Subject line
-            text: 'Redefina seu cadastro efetuando a confirmação', // plain text body
-            template: 'index'
+        transporter.use('compile',hbs(options));
+
+        await transporter.sendMail({
+            from: '"EloyAqui" <noreply@eloyaqui.com.br>',
+            to: email,
+            subject: 'Redefinicao da sua senha ✔',
+            text: 'Redefina seu cadastro efetuando a confirmação', 
+            template: 'forgotpwd',
+            context: {
+                nome : nome,
+                action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
+                whatsapp: '11 97602-3836'
+           }
         });
 
-        return res.status(200).send({ error: "Email enviado"});
+        return res.status(200).send({ success: "Email enviado"});
     },
 
     async showbyEmail(req, res){
@@ -85,7 +93,11 @@ module.exports = {
         const { email, pwd, validado, nome } = req.body;
         var docs;
 
-        const returnStore = Usuario.create({
+        const returnCount = await Usuario.countDocuments({ email: email });
+        if(returnCount > 0)
+            return res.status(400).send({ error: "O e-mail informado já está cadastrado."});
+
+        Usuario.create({
             email,
             pwd,
             validado,
@@ -115,17 +127,16 @@ module.exports = {
 
         transporter.use('compile',hbs(options));
 
-        let info = await transporter.sendMail({
-            from: '"EloyAqui" <noreply@eloyaqui.com.br>', // sender address
-            to: email, // list of receivers
-            subject: 'Confirme seu e-mail ✔', // Subject line
-            text: 'Termine seu cadastro efetuando a confirmação', // plain text body
+        await transporter.sendMail({
+            from: '"EloyAqui" <noreply@eloyaqui.com.br>',
+            to: email,
+            subject: 'Confirme seu e-mail ✔',
+            text: 'Termine seu cadastro efetuando a confirmação',
             template: 'index',
             context: {
                 nome : nome,
-                action_url: '',
-                whatsapp: '+5511976023836'
-
+                action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
+                whatsapp: '11 97602-3836'
            }
         });
 
