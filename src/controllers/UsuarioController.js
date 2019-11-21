@@ -65,7 +65,7 @@ module.exports = {
             text: 'Redefina seu cadastro efetuando a confirmação', 
             template: 'forgotpwd',
             context: {
-                nome : nome,
+                email : email,
                 action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
                 whatsapp: '11 97602-3836'
            }
