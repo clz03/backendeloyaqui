@@ -65,8 +65,9 @@ module.exports = {
             text: 'Redefina seu cadastro efetuando a confirmação', 
             template: 'forgotpwd',
             context: {
-                email : email,
+                nome : user.nome,
                 action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
+                support_url:'mailto:suporte@eloyaqui.com.br',
                 whatsapp: '11 97602-3836'
            }
         });
