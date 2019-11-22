@@ -20,7 +20,7 @@ module.exports = {
         const user = await Usuario.findOne({ email });
 
         if (!user)
-            return res.status(400).send({ error: "Usuario nao encontrado"});
+            return res.status(400).send({ error: "Usuário não encontrado"});
 
         if (senha != user.pwd)
             return res.status(400).send({ error: "Senha inválida"});
@@ -29,13 +29,28 @@ module.exports = {
         return res.json(user)
     },
 
+    async validacadastro(req, res){
+
+        const { idusuario } = req.body;
+        const user = await Usuario.findById(idusuario);
+
+        if (!user)
+            return res.status(400).send({ msg: "Usuário não encontrado"});
+
+        if(user.validado)
+            return res.status(400).send({ msg: "Usuário já está validado"});
+
+        await Usuario.updateOne({ _id: idusuario },{validado:true});
+        return res.status(200).send({ msg: "Usuário ativado com sucesso"});
+    },
+
     async forgotpwd(req, res){
 
         const { email } = req.body;
         const user = await Usuario.findOne({ email });
 
         if (!user)
-            return res.status(400).send({ error: "Usuario nao encontrado"});
+            return res.status(400).send({ error: "Usuário não encontrado"});
 
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
@@ -136,7 +151,7 @@ module.exports = {
             template: 'index',
             context: {
                 nome : nome,
-                action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
+                action_url: 'http://eloyaqui.com.br/validausuario/' + docs._id,
                 whatsapp: '11 97602-3836'
            }
         });
