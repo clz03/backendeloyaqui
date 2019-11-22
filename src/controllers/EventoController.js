@@ -44,14 +44,16 @@ module.exports = {
         }
 
         if(diasemana == 0){
-            for (var i = returnSlots.hrinicio_domingo; i <= returnSlots.hrfim_domingo; i++) {
-                var status = jsonEventos.includes(i) ? 'I' : 'D';
-                jsonArr.push({
-                    id: req.params.data + i,
-                    data: req.params.data,
-                    hora: i,
-                    status: status
-                });
+            if(returnSlots.hrinicio_domingo > 0){
+                for (var i = returnSlots.hrinicio_domingo; i <= returnSlots.hrfim_domingo; i++) {
+                    var status = jsonEventos.includes(i) ? 'I' : 'D';
+                    jsonArr.push({
+                        id: req.params.data + i,
+                        data: req.params.data,
+                        hora: i,
+                        status: status
+                    });
+                }
             }
         }
 
@@ -68,14 +70,16 @@ module.exports = {
         }
 
         if(diasemana == 6){
-            for (var i = returnSlots.hrinicio_sabado; i <= returnSlots.hrfim_sabado; i++) {
-                var status = jsonEventos.includes(i) ? 'I' : 'D';
-                jsonArr.push({
-                    id: req.params.data + i,
-                    data: req.params.data,
-                    hora: i,
-                    status: status
-                });
+            if(returnSlots.hrinicio_sabado > 0){
+                for (var i = returnSlots.hrinicio_sabado; i <= returnSlots.hrfim_sabado; i++) {
+                    var status = jsonEventos.includes(i) ? 'I' : 'D';
+                    jsonArr.push({
+                        id: req.params.data + i,
+                        data: req.params.data,
+                        hora: i,
+                        status: status
+                    });
+                }
             }
         }
 
