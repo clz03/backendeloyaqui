@@ -32,16 +32,22 @@ module.exports = {
     async validacadastro(req, res){
 
         const { idusuario } = req.body;
-        const user = await Usuario.findById(idusuario);
 
-        if (!user)
-            return res.status(400).send({ msg: "Usuário não encontrado"});
+        try {
+            const user = await Usuario.findById(idusuario);
+            if (!user)
+                return res.status(200).send({ msg: "Usuário não encontrado"});
 
-        if(user.validado)
-            return res.status(400).send({ msg: "Usuário já está validado"});
+            if(user.validado)
+                return res.status(200).send({ msg: "Usuário já está validado"});
 
-        await Usuario.updateOne({ _id: idusuario },{validado:true});
-        return res.status(200).send({ msg: "Usuário ativado com sucesso"});
+            await Usuario.updateOne({ _id: idusuario },{validado:true});
+            return res.status(200).send({ msg: "Usuário ativado com sucesso"});
+
+        } catch (error) {
+            return res.status(200).send({ msg: "Usuário não encontrado"});
+        }
+
     },
 
     async forgotpwd(req, res){
