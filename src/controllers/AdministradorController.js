@@ -20,10 +20,10 @@ module.exports = {
         const user = await Administrador.findOne({ email });
 
         if (!user)
-            return res.status(400).send({ error: "Usuario nao encontrado"});
+            return res.status(200).send({ error: "Usuario nao encontrado"});
 
         if (senha != user.pwd)
-            return res.status(400).send({ error: "Senha inválida"});
+            return res.status(200).send({ error: "Senha inválida"});
 
         user.pwd = undefined;
 
