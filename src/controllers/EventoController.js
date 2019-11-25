@@ -21,6 +21,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyestab(req, res){
+        const returnShow = await Evento.find({ idestabelecimento: req.params.estab }).populate('idusuario');
+        return res.json(returnShow)
+    },
+
     async showbyday(req, res){
         // 0 DOMINGO
         // 1 SEGUNDA
