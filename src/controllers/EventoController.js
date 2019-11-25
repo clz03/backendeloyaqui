@@ -8,23 +8,34 @@ module.exports = {
 
     async index(req, res){
         const returnGet = await Evento.find();
-        return res.json(returnGet)
+        return res.json(returnGet);
     },
 
     async show(req, res){
         const returnShow = await Evento.find({ _id: req.params.id });
-        return res.json(returnShow)
+        return res.json(returnShow);
     },
 
     async showbyuser(req, res){
         const returnShow = await Evento.find({ idusuario: req.params.idusuario }).populate('idestabelecimento');
-        return res.json(returnShow)
+        return res.json(returnShow);
     },
 
     async showbyestab(req, res){
-        const returnShow = await Evento.find({ idestabelecimento: req.params.estab }).populate('idusuario');
-        return res.json(returnShow)
+        const returnShow = await Evento.find({ 
+            idestabelecimento: req.params.estab, 
+            data: {
+                "$gte": new Date(2019, 11, 01), 
+                "$lt": new Date(2019, 12, 01)} 
+            })
+            .populate('idusuario');
+
+        return res.json(returnShow);
     },
+
+
+    db.posts.find( //query today up to tonight
+        {"created_on": {"$gte": new Date(2012, 7, 14), "$lt": new Date(2012, 7, 15)}})
 
     async showbyday(req, res){
         // 0 DOMINGO
