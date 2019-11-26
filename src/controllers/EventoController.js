@@ -22,15 +22,20 @@ module.exports = {
     },
 
     async showbyestab(req, res){
+        const ano_atual = 2019;
+        const ano_proximo = 2020;
+
         const mes_atual = req.params.mes;
-        const mes_proximo = mes_atual == '12' ? 1 : parseInt(mes_atual) + 1;
-        console.log(mes_atual);
-        console.log(mes_proximo);
+        const mes_proximo = mes_atual == '12' ? '01' : parseInt(mes_atual) + 1;
+
+        const data_gte = new Date(ano_atual + '-' + mes_atual + '-01');
+        const data_lt = new Date(mes_proximo < mes_atual ? ano_proximo + '-' + mes_proximo + '-' + '01' : ano_atual + '-' + mes_proximo + '-01');
+
         const returnShow = await Evento.find({ 
             idestabelecimento: req.params.estab, 
             data: {
-                $gte: '2019-' + mes_atual + '-01',
-                $lt: '2019-' + mes_proximo + '-01'
+                "$gte": data_gte,
+                "$lt": data_lt
             } 
             })
             .populate('idusuario');
