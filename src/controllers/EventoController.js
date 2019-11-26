@@ -33,10 +33,6 @@ module.exports = {
         return res.json(returnShow);
     },
 
-
-    db.posts.find( //query today up to tonight
-        {"created_on": {"$gte": new Date(2012, 7, 14), "$lt": new Date(2012, 7, 15)}})
-
     async showbyday(req, res){
         // 0 DOMINGO
         // 1 SEGUNDA
