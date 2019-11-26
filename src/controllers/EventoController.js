@@ -22,11 +22,16 @@ module.exports = {
     },
 
     async showbyestab(req, res){
+        const mes_atual = req.params.mes;
+        const mes_proximo = mes_atual == '12' ? 1 : parseInt(mes_atual) + 1;
+        console.log(mes_atual);
+        console.log(mes_proximo);
         const returnShow = await Evento.find({ 
             idestabelecimento: req.params.estab, 
             data: {
-                "$gte": new Date(2019, 11, 01), 
-                "$lt": new Date(2019, 12, 01)} 
+                $gte: '2019-' + mes_atual + '-01',
+                $lt: '2019-' + mes_proximo + '-01'
+            } 
             })
             .populate('idusuario');
 
