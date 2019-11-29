@@ -20,6 +20,7 @@ routes.delete('/categorias/:id', CategoriaController.delete);
 
 routes.post('/cupons', CupomController.store);
 routes.get('/cupons', CupomController.index);
+routes.get('/cupons/Todos', CupomController.showAll);
 routes.get('/cupons/:id', CupomController.show);
 routes.get('/cupons/estabelecimento/:id', CupomController.showbyestab);
 routes.put('/cupons/:id', CupomController.update);

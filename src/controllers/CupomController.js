@@ -22,6 +22,11 @@ module.exports = {
         return res.json(result)
     },
 
+    async showAll(req, res){
+        const returnShow = await Cupom.find();
+        return res.json(returnShow)
+    },
+
     async show(req, res){
         const returnShow = await Cupom.find({ _id: req.params.id }).populate('idestabelecimento');
         return res.json(returnShow)
