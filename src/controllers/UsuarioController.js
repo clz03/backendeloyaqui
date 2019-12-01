@@ -162,7 +162,7 @@ module.exports = {
            }
         });
 
-        return res.json(docs)
+        return res.json(user)
 
     },
 };
