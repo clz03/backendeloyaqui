@@ -78,6 +78,10 @@ module.exports = {
           };
 
         transporter.use('compile',hbs(options));
+        
+        const userid = user._id;
+        const useridp1 = userid.toString().substring(0, 1);
+        const useridp2 = userid.toString().substring(5, 6);
 
         await transporter.sendMail({
             from: '"EloyAqui" <noreply@eloyaqui.com.br>',
@@ -87,7 +91,7 @@ module.exports = {
             template: 'forgotpwd',
             context: {
                 nome : user.nome,
-                action_url: 'http://eloyaqui.com.br/redefinirsenha/' + user._id + '/' + user._id.substring(0, 1) + user._id.substring(5, 6),
+                action_url: 'http://eloyaqui.com.br/redefinirsenha/' + userid + '/' + useridp1 + useridp2,
                 support_url:'mailto:suporte@eloyaqui.com.br',
                 whatsapp: '1197602-3836'
            }
