@@ -82,14 +82,14 @@ module.exports = {
         await transporter.sendMail({
             from: '"EloyAqui" <noreply@eloyaqui.com.br>',
             to: email,
-            subject: 'Redefinicao da sua senha ✔',
-            text: 'Redefina seu cadastro efetuando a confirmação', 
+            subject: 'Redefinição da sua senha ✔',
+            text: 'Redefina sua senha', 
             template: 'forgotpwd',
             context: {
                 nome : user.nome,
-                action_url: 'http://eloyaqui.com.br/validauser/FGF5FREDS542VGHJHHHGTR8541',
+                action_url: 'http://eloyaqui.com.br/redefinirsenha/' + user._id + '/' + user._id.substring(0, 1) + user._id.substring(5, 6),
                 support_url:'mailto:suporte@eloyaqui.com.br',
-                whatsapp: '11 97602-3836'
+                whatsapp: '1197602-3836'
            }
         });
 
@@ -113,7 +113,6 @@ module.exports = {
 
     async store(req, res) {
         const { email, pwd, validado, nome } = req.body;
-        var docs;
 
         const returnCount = await Usuario.countDocuments({ email: email });
          if(returnCount > 0)
