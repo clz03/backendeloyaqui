@@ -31,17 +31,17 @@ module.exports = {
 
     async validacadastro(req, res){
 
-        const { idusuario } = req.body;
+        const { id } = req.params;
 
         try {
-            const user = await Usuario.findById(idusuario);
+            const user = await Usuario.findById(id);
             if (!user)
                 return res.status(200).send({ msg: "Usuário não encontrado"});
 
             if(user.validado)
                 return res.status(200).send({ msg: "Usuário já está validado"});
 
-            await Usuario.updateOne({ _id: idusuario },{validado:true});
+            await Usuario.updateOne({ _id: id },{validado:true});
             return res.status(200).send({ msg: "Usuário ativado com sucesso"});
 
         } catch (error) {
@@ -157,8 +157,8 @@ module.exports = {
             template: 'index',
             context: {
                 nome : nome,
-                action_url: 'http://eloyaqui.com.br/validausuario/' + docs._id,
-                whatsapp: '11 97602-3836'
+                action_url: 'http://eloyaqui.com.br/validacadastro/' + docs._id,
+                whatsapp: '1197602-3836'
            }
         });
 
