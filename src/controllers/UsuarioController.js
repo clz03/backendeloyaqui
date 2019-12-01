@@ -31,17 +31,17 @@ module.exports = {
 
     async validacadastro(req, res){
 
-        const { id } = req.params;
+        const { idusuario } = req.body;
 
         try {
-            const user = await Usuario.findById(id);
+            const user = await Usuario.findById(idusuario);
             if (!user)
                 return res.status(200).send({ msg: "Usuário não encontrado"});
 
             if(user.validado)
                 return res.status(200).send({ msg: "Usuário já está validado"});
 
-            await Usuario.updateOne({ _id: id },{validado:true});
+            await Usuario.updateOne({ _id: idusuario },{validado:true});
             return res.status(200).send({ msg: "Usuário ativado com sucesso"});
 
         } catch (error) {
@@ -116,17 +116,17 @@ module.exports = {
         var docs;
 
         const returnCount = await Usuario.countDocuments({ email: email });
-        if(returnCount > 0)
-            return res.status(400).send({ error: "O e-mail informado já está cadastrado."});
-
-        Usuario.create({
+         if(returnCount > 0)
+             return res.status(400).send({ error: "O e-mail informado já está cadastrado."});
+     
+        await Usuario.create({
             email,
             pwd,
             validado,
             nome
-        }, function(error,doc) {
-          docs = doc;
         });
+
+        const user = await Usuario.findOne({ email });
 
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
@@ -157,7 +157,7 @@ module.exports = {
             template: 'index',
             context: {
                 nome : nome,
-                action_url: 'http://eloyaqui.com.br/validacadastro/' + docs._id,
+                action_url: 'http://eloyaqui.com.br/validausuario/' + user._id,
                 whatsapp: '1197602-3836'
            }
         });
