@@ -9,6 +9,7 @@ const UsuarioController = require('./controllers/UsuarioController.js');
 const AdministradorController = require('./controllers/AdministradorController.js');
 const EventoController = require('./controllers/EventoController.js');
 const UserCupomController = require('./controllers/UserCupomController.js');
+const PrecadastroController = require('./controllers/PrecadastroController.js');
 
 const routes = express.Router();
 
@@ -88,5 +89,11 @@ routes.get('/usercupons/:id', UserCupomController.show);
 routes.get('/usercupons/usuario/:id', UserCupomController.showbyuser);
 routes.put('/usercupons/:id', UserCupomController.update);
 routes.delete('/usercupons/:id', UserCupomController.delete);
+
+routes.post('/precadastro', PrecadastroController.store);
+routes.get('/precadastro', PrecadastroController.index);
+routes.get('/precadastro/:id', PrecadastroController.show);
+routes.put('/precadastro/:id', PrecadastroController.update);
+routes.delete('/precadastro/:id', PrecadastroController.delete);
 
 module.exports = routes;
