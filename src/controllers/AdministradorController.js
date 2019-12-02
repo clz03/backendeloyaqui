@@ -1,4 +1,6 @@
 const Administrador = require('../model/Administrador');
+const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
 
 module.exports = {
 
