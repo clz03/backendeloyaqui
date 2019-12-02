@@ -71,6 +71,7 @@ routes.post('/administradores', AdministradorController.store);
 routes.get('/administradores', AdministradorController.index);
 routes.get('/administradores/:id', AdministradorController.show);
 routes.post('/admauthenticate/', AdministradorController.authenticate);
+routes.post('/admforgotpwd', AdministradorController.forgotpwd);
 routes.put('/administradores/:id', AdministradorController.update);
 routes.delete('/administradores/:id', AdministradorController.delete);
 
