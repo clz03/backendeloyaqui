@@ -36,7 +36,7 @@ module.exports = {
         const user = await Administrador.findOne({ email });
 
         if (!user)
-            return res.status(400).send({ error: "Usuário não encontrado"});
+            return res.status(200).send({ error: "Usuário não encontrado"});
 
         let transporter = nodemailer.createTransport({
             host: "smtp.mailtrap.io",
@@ -77,7 +77,7 @@ module.exports = {
            }
         });
 
-        return res.status(200).send({ success: "Email enviado"});
+        return res.status(200).send({ success: "Email enviado com sucesso. Verifique seu e-mail para gerar nova senha."});
     },
 
     async update(req, res){
