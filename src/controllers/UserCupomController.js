@@ -45,6 +45,8 @@ module.exports = {
                 utilizado
             });
             return res.json(returnPost);
+        } else {
+            return res.json("{sucess:true}");
         }
     }
 
