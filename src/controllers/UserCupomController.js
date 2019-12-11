@@ -33,17 +33,19 @@ module.exports = {
         return res.json(returnDel)
     },
 
-    store(req, res) {
+    async store(req, res) {
         const { idusuario, idcupom, idestabelecimento, utilizado } = req.body;
 
-        const returnPost = UserCupom.create({
-            idusuario,
-            idcupom,
-            idestabelecimento,
-            utilizado
-        });
-
-        return res.json(returnPost);
-    },
+        const countCupom = await UserCupom.countDocuments({ idusuario: idusuario, idcupom: idcupom })
+        if(countCupom < 1){
+            const returnPost = UserCupom.create({
+                idusuario,
+                idcupom,
+                idestabelecimento,
+                utilizado
+            });
+            return res.json(returnPost);
+        }
+    }
 
 };
