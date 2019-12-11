@@ -17,7 +17,8 @@ module.exports = {
     },
 
     async showbyuser(req, res){
-        const returnShow = await Evento.find({ idusuario: req.params.idusuario }).populate('idestabelecimento');
+        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        const returnShow = await Evento.find({ idusuario: req.params.idusuario, data: { "$gte": yesterday }}).populate('idestabelecimento');
         return res.json(returnShow);
     },
 

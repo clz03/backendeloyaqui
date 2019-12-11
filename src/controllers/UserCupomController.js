@@ -13,7 +13,13 @@ module.exports = {
     },
 
     async showbyuser(req, res){
-        const returnShow = await UserCupom.find({ idusuario: req.params.id }).populate('idcupom').populate('idestabelecimento');
+        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        const returnShow = await UserCupom.find({ idusuario: req.params.id })
+        .populate({
+            path: 'idcupom',
+            match: { validade: { "$gte": yesterday }}
+        })
+        .populate('idestabelecimento');
         return res.json(returnShow)
     },
 
