@@ -15,6 +15,9 @@ const UsuarioSchema = new Schema({
     },
     nome: {
         type: String
+    },
+    telefone: {
+        type: String
     }
 }, {
     timestamps: true

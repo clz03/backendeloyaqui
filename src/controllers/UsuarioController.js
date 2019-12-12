@@ -116,7 +116,7 @@ module.exports = {
     },
 
     async store(req, res) {
-        const { email, pwd, validado, nome } = req.body;
+        const { email, pwd, validado, nome, telefone } = req.body;
 
         const returnCount = await Usuario.countDocuments({ email: email });
          if(returnCount > 0)
@@ -126,7 +126,8 @@ module.exports = {
             email,
             pwd,
             validado,
-            nome
+            nome,
+            telefone
         });
 
         const user = await Usuario.findOne({ email });
