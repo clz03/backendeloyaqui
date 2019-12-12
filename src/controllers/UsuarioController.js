@@ -92,7 +92,7 @@ module.exports = {
             context: {
                 nome : user.nome,
                 action_url: 'http://eloyaqui.com.br/redefinirsenha/' + userid + '/' + useridp1 + useridp2,
-                support_url:'mailto:suporte@eloyaqui.com.br',
+                support_email:'mailto:suporte@eloyaqui.com.br',
                 whatsapp: '1197602-3836'
            }
         });
