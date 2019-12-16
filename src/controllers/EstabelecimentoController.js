@@ -105,7 +105,7 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, fone1, fone2, pedonline, plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo,idcategoria } = req.body;
+        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, fone1, fone2, pedonline, cardapio, plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo,idcategoria } = req.body;
 
         const returnPost = Estabelecimento.create({
             nome, 
@@ -121,6 +121,7 @@ module.exports = {
             fone1, 
             fone2, 
             pedonline,
+            cardapio,
             plano,
             email, 
             facebook, 

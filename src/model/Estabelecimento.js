@@ -51,6 +51,10 @@ const EstabelecimentoSchema = new Schema({
         require: true,
         default: false
     },
+    cardapio: {
+        type: Boolean,
+        default: false
+    },
     plano: {
         type: Number,
         require: true,

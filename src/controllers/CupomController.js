@@ -3,13 +3,14 @@ const Cupom = require('../model/Cupom');
 module.exports = {
 
     async index(req, res){
+        const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
         var totalCount = 0;
 
         totalCount = await Cupom.countDocuments();
 
-        const returnGet = await Cupom.find().populate('idestabelecimento')
+        const returnGet = await Cupom.find({ validade: { "$gte": yesterday }}).populate('idestabelecimento')
         .skip((page -1) * pagination)
         .limit(pagination)
         .sort({data: -1});
@@ -33,7 +34,8 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const returnShow = await Cupom.find({ idestabelecimento: req.params.id });
+        const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        const returnShow = await Cupom.find({ idestabelecimento: req.params.id, validade: { "$gte": yesterday } });
         return res.json(returnShow)
     },
 
