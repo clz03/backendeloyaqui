@@ -11,6 +11,7 @@ const EventoController = require('./controllers/EventoController.js');
 const UserCupomController = require('./controllers/UserCupomController.js');
 const PrecadastroController = require('./controllers/PrecadastroController.js');
 const HomeAlertController = require('./controllers/HomeAlertController.js');
+const TelUtilController = require('./controllers/TelUtilController.js');
 
 const routes = express.Router();
 
@@ -103,5 +104,11 @@ routes.get('/homealert', HomeAlertController.index);
 routes.get('/homealert/:id', HomeAlertController.show);
 routes.put('/homealert/:id', HomeAlertController.update);
 routes.delete('/homealert/:id', HomeAlertController.delete);
+
+routes.post('/teluteis', TelUtilController.store);
+routes.get('/teluteis', TelUtilController.index);
+routes.get('/teluteis/:id', TelUtilController.show);
+routes.put('/teluteis/:id', TelUtilController.update);
+routes.delete('/teluteis/:id', TelUtilController.delete);
 
 module.exports = routes;
