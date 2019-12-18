@@ -12,6 +12,7 @@ const UserCupomController = require('./controllers/UserCupomController.js');
 const PrecadastroController = require('./controllers/PrecadastroController.js');
 const HomeAlertController = require('./controllers/HomeAlertController.js');
 const TelUtilController = require('./controllers/TelUtilController.js');
+const CardapioController = require('./controllers/CardapioController.js');
 
 const routes = express.Router();
 
@@ -110,5 +111,11 @@ routes.get('/teluteis', TelUtilController.index);
 routes.get('/teluteis/:id', TelUtilController.show);
 routes.put('/teluteis/:id', TelUtilController.update);
 routes.delete('/teluteis/:id', TelUtilController.delete);
+
+routes.post('/cardapios', CardapioController.store);
+routes.get('/cardapios', CardapioController.index);
+routes.get('/cardapios/:id', CardapioController.show);
+routes.put('/cardapios/:id', CardapioController.update);
+routes.delete('/cardapios/:id', CardapioController.delete);
 
 module.exports = routes;
