@@ -37,6 +37,11 @@ const PrecadastroSchema = new Schema({
         require: true,
         default: false
     },
+    cardapio: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
     email: {
         type: String
     },
