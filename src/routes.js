@@ -115,6 +115,7 @@ routes.delete('/teluteis/:id', TelUtilController.delete);
 routes.post('/cardapios', CardapioController.store);
 routes.get('/cardapios', CardapioController.index);
 routes.get('/cardapios/:id', CardapioController.show);
+routes.get('/cardapios/estabelecimento/:idestabelecimento', CardapioController.showbyestab);
 routes.put('/cardapios/:id', CardapioController.update);
 routes.delete('/cardapios/:id', CardapioController.delete);
 
