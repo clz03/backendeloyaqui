@@ -9,7 +9,7 @@ module.exports = {
     },
 
     async show(req, res){
-        const returnShow = await Cardapio.find({ _id: req.params.id });
+        const returnShow = await Cardapio.find({ _id: req.params.id }).populate('idestabelecimento');
         return res.json(returnShow)
     },
 
