@@ -4,12 +4,12 @@ module.exports = {
 
     async index(req, res){
 
-        const returnGet = await Cardapio.find();
+        const returnGet = await Cardapio.find().populate('idestabelecimento');
         return res.json(returnGet)
     },
 
     async show(req, res){
-        const returnShow = await Cardapio.find({ _id: req.params.id }).populate('idestabelecimento');
+        const returnShow = await Cardapio.find({ _id: req.params.id });
         return res.json(returnShow)
     },
 
