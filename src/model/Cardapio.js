@@ -9,6 +9,9 @@ const CardapioSchema = new Schema({
         type: String,
         required: true
     },
+    descr: {
+        type: String
+    },
     valor: {
         type: String,
         required: true

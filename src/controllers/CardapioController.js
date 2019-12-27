@@ -29,11 +29,12 @@ module.exports = {
     },
 
     store(req, res) {
-        const { categoria, item, valor, idestabelecimento } = req.body;
+        const { categoria, item, descr,valor, idestabelecimento } = req.body;
 
         const returnPost = Cardapio.create({
             categoria,
             item,
+            descr,
             valor,
             idestabelecimento
         });

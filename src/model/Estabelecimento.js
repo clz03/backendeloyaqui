@@ -46,12 +46,16 @@ const EstabelecimentoSchema = new Schema({
     fone2: {
         type: String
     },
-    pedonline: {
+    agendamento: {
         type: Boolean,
         require: true,
         default: false
     },
     cardapio: {
+        type: Boolean,
+        default: false
+    },
+    delivery: {
         type: Boolean,
         default: false
     },

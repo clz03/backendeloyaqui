@@ -46,9 +46,9 @@ module.exports = {
         const page = req.query.page ? parseInt(req.query.page) : 1;
         var totalCount = 0;
 
-        totalCount = await Estabelecimento.countDocuments({ pedonline: '1' });
+        totalCount = await Estabelecimento.countDocuments({ agendamento: '1' });
 
-        const returnShow = await Estabelecimento.find({ pedonline: '1' })
+        const returnShow = await Estabelecimento.find({ agendamento: '1' })
         .skip((page -1) * pagination)
         .limit(pagination);
 
@@ -105,7 +105,7 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, fone1, fone2, pedonline, cardapio, plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo,idcategoria } = req.body;
+        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, fone1, fone2, agendamento, cardapio, delivery ,plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo,idcategoria } = req.body;
 
         const returnPost = Estabelecimento.create({
             nome, 
@@ -120,8 +120,9 @@ module.exports = {
             cep, 
             fone1, 
             fone2, 
-            pedonline,
+            agendamento,
             cardapio,
+            delivery,
             plano,
             email, 
             facebook, 
