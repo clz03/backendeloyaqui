@@ -60,6 +60,25 @@ module.exports = {
         return res.json(result)
     },
 
+    async showbydelivery(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+        var totalCount = 0;
+
+        totalCount = await Estabelecimento.countDocuments({ delivery: '1' });
+
+        const returnShow = await Estabelecimento.find({ delivery: '1' })
+        .skip((page -1) * pagination)
+        .limit(pagination);
+
+        var result = {
+            "totalRecords" : totalCount,
+            "result": returnShow
+        };
+        
+        return res.json(result)
+    },
+
     async showbysearch(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;

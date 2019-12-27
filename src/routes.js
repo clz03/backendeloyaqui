@@ -37,6 +37,7 @@ routes.get('/estabelecimentos/:id', EstabelecimentoController.show);
 routes.get('/estabelecimentos/categoria/:id', EstabelecimentoController.showbycat);
 routes.get('/estabelecimentos/busca/:nome', EstabelecimentoController.showbysearch);
 routes.get('/estabelecimentos/com/agendamento/habilitado', EstabelecimentoController.showbyagenda);
+routes.get('/estabelecimentos/delivery', EstabelecimentoController.showbydelivery);
 routes.put('/estabelecimentos/:id', EstabelecimentoController.update);
 routes.delete('/estabelecimentos/:id', EstabelecimentoController.delete);
 
