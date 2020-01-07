@@ -13,6 +13,7 @@ const PrecadastroController = require('./controllers/PrecadastroController.js');
 const HomeAlertController = require('./controllers/HomeAlertController.js');
 const TelUtilController = require('./controllers/TelUtilController.js');
 const CardapioController = require('./controllers/CardapioController.js');
+const EnderecoController = require('./controllers/EnderecoController.js');
 
 const routes = express.Router();
 
@@ -119,5 +120,11 @@ routes.get('/cardapios/:id', CardapioController.show);
 routes.get('/cardapios/estabelecimento/:idestabelecimento', CardapioController.showbyestab);
 routes.put('/cardapios/:id', CardapioController.update);
 routes.delete('/cardapios/:id', CardapioController.delete);
+
+routes.post('/enderecos', EnderecoController.store);
+routes.get('/enderecos', EnderecoController.index);
+routes.get('/enderecos/:id', EnderecoController.show);
+routes.put('/enderecos/:id', EnderecoController.update);
+routes.delete('/enderecos/:id', EnderecoController.delete);
 
 module.exports = routes;
