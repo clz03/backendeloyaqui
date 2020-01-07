@@ -13,6 +13,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyuser(req, res){
+        const returnShow = await Endereco.find({ idusuario: req.params.id });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Endereco.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)

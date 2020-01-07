@@ -124,6 +124,7 @@ routes.delete('/cardapios/:id', CardapioController.delete);
 routes.post('/enderecos', EnderecoController.store);
 routes.get('/enderecos', EnderecoController.index);
 routes.get('/enderecos/:id', EnderecoController.show);
+routes.get('/enderecos/usuario/:id', EnderecoController.showbyuser);
 routes.put('/enderecos/:id', EnderecoController.update);
 routes.delete('/enderecos/:id', EnderecoController.delete);
 
