@@ -21,6 +21,10 @@ const PedidoSchema = new Schema({
         type: Number,
         required: true
     },
+    tipoentrega: {
+        type: String,
+        required: true
+    },
     tipopag: {
         type: String,
         required: true
@@ -32,6 +36,10 @@ const PedidoSchema = new Schema({
     idusuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
+    },
+    idendereco: {
+        type: Schema.Types.ObjectId,
+        ref: 'Endereco'
     }
 }, {
     timestamps: true
