@@ -14,6 +14,7 @@ const HomeAlertController = require('./controllers/HomeAlertController.js');
 const TelUtilController = require('./controllers/TelUtilController.js');
 const CardapioController = require('./controllers/CardapioController.js');
 const EnderecoController = require('./controllers/EnderecoController.js');
+const PedidosController = require('./controllers/PedidosController.js');
 
 const routes = express.Router();
 
@@ -127,5 +128,12 @@ routes.get('/enderecos/:id', EnderecoController.show);
 routes.get('/enderecos/usuario/:id', EnderecoController.showbyuser);
 routes.put('/enderecos/:id', EnderecoController.update);
 routes.delete('/enderecos/:id', EnderecoController.delete);
+
+routes.post('/pedidos', CategoriaController.store);
+routes.get('/pedidos', CategoriaController.index);
+routes.get('/pedidos/:id', CategoriaController.show);
+routes.get('/pedidos/usuario/:id', CategoriaController.showbyuser);
+routes.put('/pedidos/:id', CategoriaController.update);
+routes.delete('/pedidos/:id', CategoriaController.delete);
 
 module.exports = routes;
