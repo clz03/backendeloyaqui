@@ -129,11 +129,11 @@ routes.get('/enderecos/usuario/:id', EnderecoController.showbyuser);
 routes.put('/enderecos/:id', EnderecoController.update);
 routes.delete('/enderecos/:id', EnderecoController.delete);
 
-routes.post('/pedidos', CategoriaController.store);
-routes.get('/pedidos', CategoriaController.index);
-routes.get('/pedidos/:id', CategoriaController.show);
-routes.get('/pedidos/usuario/:id', CategoriaController.showbyuser);
-routes.put('/pedidos/:id', CategoriaController.update);
-routes.delete('/pedidos/:id', CategoriaController.delete);
+routes.post('/pedidos', PedidosController.store);
+routes.get('/pedidos', PedidosController.index);
+routes.get('/pedidos/:id', PedidosController.show);
+routes.get('/pedidos/usuario/:id', PedidosController.showbyuser);
+routes.put('/pedidos/:id', PedidosController.update);
+routes.delete('/pedidos/:id', PedidosController.delete);
 
 module.exports = routes;
