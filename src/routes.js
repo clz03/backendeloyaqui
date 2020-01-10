@@ -14,7 +14,7 @@ const HomeAlertController = require('./controllers/HomeAlertController.js');
 const TelUtilController = require('./controllers/TelUtilController.js');
 const CardapioController = require('./controllers/CardapioController.js');
 const EnderecoController = require('./controllers/EnderecoController.js');
-const PedidosController = require('./controllers/PedidosController.js');
+const PedidoController = require('./controllers/PedidoController.js');
 
 const routes = express.Router();
 
@@ -129,11 +129,11 @@ routes.get('/enderecos/usuario/:id', EnderecoController.showbyuser);
 routes.put('/enderecos/:id', EnderecoController.update);
 routes.delete('/enderecos/:id', EnderecoController.delete);
 
-routes.post('/pedidos', PedidosController.store);
-routes.get('/pedidos', PedidosController.index);
-routes.get('/pedidos/:id', PedidosController.show);
-routes.get('/pedidos/usuario/:id', PedidosController.showbyuser);
-routes.put('/pedidos/:id', PedidosController.update);
-routes.delete('/pedidos/:id', PedidosController.delete);
+routes.post('/pedidos', PedidoController.store);
+routes.get('/pedidos', PedidoController.index);
+routes.get('/pedidos/:id', PedidoController.show);
+routes.get('/pedidos/usuario/:id', PedidoController.showbyuser);
+routes.put('/pedidos/:id', PedidoController.update);
+routes.delete('/pedidos/:id', PedidoController.delete);
 
 module.exports = routes;
