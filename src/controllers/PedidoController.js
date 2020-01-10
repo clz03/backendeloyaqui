@@ -19,10 +19,9 @@ module.exports = {
 
         totalCount = await Pedido.countDocuments({ idusuario: req.params.id });
 
-        const returnShow = await Pedido.find({ idusuario: req.params.id})
+        const returnShow = await Pedido.find({ idusuario: req.params.id })
         .skip((page -1) * pagination)
-        .limit(pagination)
-        .populate(idestabelecimento);
+        .limit(pagination);
 
         var result = {
             "totalRecords" : totalCount,
