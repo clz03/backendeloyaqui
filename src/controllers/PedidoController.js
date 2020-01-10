@@ -21,7 +21,8 @@ module.exports = {
 
         const returnShow = await Pedido.countDocuments({ idusuario: req.params.id })
         .skip((page -1) * pagination)
-        .limit(pagination);
+        .limit(pagination)
+        .populate(idestabelecimento);
 
         var result = {
             "totalRecords" : totalCount,
