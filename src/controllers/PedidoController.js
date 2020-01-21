@@ -43,7 +43,7 @@ module.exports = {
     },
 
     store(req, res) {
-        const { data, status, subtotal, taxaentrega, total, tipopag, tipoentrega, idestabelecimento, idusuario, idendereco } = req.body;
+        const { data, status, subtotal, taxaentrega, total, tipopag, tipoentrega, apelido, rua, numero, bairro, cep, complemento,idestabelecimento, idusuario, idendereco } = req.body;
 
         const returnPost = Pedido.create({
             data, 
@@ -53,6 +53,12 @@ module.exports = {
             total, 
             tipopag, 
             tipoentrega,
+            apelido,
+            rua,
+            numero,
+            bairro,
+            cep,
+            complemento,
             idestabelecimento, 
             idusuario,
             idendereco

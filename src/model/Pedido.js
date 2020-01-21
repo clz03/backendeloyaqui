@@ -29,6 +29,30 @@ const PedidoSchema = new Schema({
         type: String,
         required: true
     },
+    apelido: {
+        type: String,
+        required: true
+    },
+    rua: {
+        type: String,
+        required: true
+    },
+    numero: {
+        type: String,
+        required: true
+    },
+    bairro: {
+        type: String,
+        required: true
+    },
+    cep: {
+        type: String,
+        required: true
+    },
+    complemento: {
+        type: String,
+        required: true
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
@@ -36,10 +60,6 @@ const PedidoSchema = new Schema({
     idusuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
-    },
-    idendereco: {
-        type: Schema.Types.ObjectId,
-        ref: 'Endereco'
     }
 }, {
     timestamps: true
