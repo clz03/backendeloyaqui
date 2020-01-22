@@ -30,8 +30,7 @@ const PedidoSchema = new Schema({
         required: true
     },
     apelido: {
-        type: String,
-        required: true
+        type: String
     },
     rua: {
         type: String,
@@ -46,12 +45,10 @@ const PedidoSchema = new Schema({
         required: true
     },
     cep: {
-        type: String,
-        required: true
+        type: String
     },
     complemento: {
-        type: String,
-        required: true
+        type: String
     },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
