@@ -68,7 +68,7 @@ module.exports = {
 
         const order = await Pedido.findOne({ data, idusuario });
 
-        itensPed.forEach(function(item){
+        itensPed.forEach(async function(item){
             await ItemPedido.create({
                 item:item.item, 
                 valorun: item.valorun,
