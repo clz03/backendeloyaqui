@@ -5,10 +5,10 @@ const ItensPedidoSchema = new Schema({
         type: String,
         required: true
     },
-    descr: {
-        type: String,
-        required: true
-    },
+    // descr: {
+    //     type: String,
+    //     required: true
+    // },
     valorun: {
         type: Number,
         required: true
