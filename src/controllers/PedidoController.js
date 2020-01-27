@@ -42,10 +42,10 @@ module.exports = {
         return res.json(returnDel)
     },
 
-    store(req, res) {
+   async store(req, res) {
         const { data, status, subtotal, taxaentrega, total, tipopag, tipoentrega, apelido, rua, numero, bairro, cep, complemento,idestabelecimento, idusuario } = req.body;
 
-        const returnPost = Pedido.create({
+        const returnPost = await Pedido.create({
             data, 
             status, 
             subtotal, 
@@ -61,6 +61,21 @@ module.exports = {
             complemento,
             idestabelecimento, 
             idusuario
+        });
+
+        const { itensPed } = req.body;
+
+        const order = await Pedido.findOne({ data, idusuario });
+
+        itensPed.forEach(function(item){
+            await Pedido.create({
+                item:item.item, 
+                valorun: item.valorun,
+                valortotal: item.valortotal,
+                qtde: item.qtdy, 
+                obs: item.obs,
+                idpedido: order._id
+            });            
         });
 
         return res.json(returnPost);
