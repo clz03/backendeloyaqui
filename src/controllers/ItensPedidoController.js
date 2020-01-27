@@ -23,7 +23,7 @@ module.exports = {
     },
 
     store(req, res) {
-        const { item, valorun, valortotal, qtde, idpedido } = req.body;
+        const { item, valorun, valortotal, qtde, obs, idpedido } = req.body;
 
         const returnPost = Pedido.create({
             item, 
@@ -31,6 +31,7 @@ module.exports = {
             valorun,
             valortotal,
             qtde, 
+            obs,
             idpedido
         });
 

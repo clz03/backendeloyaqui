@@ -21,6 +21,9 @@ const ItensPedidoSchema = new Schema({
         type: Number,
         required: true
     },
+    obs: {
+        type: String
+    },
     idpedido: {
         type: Schema.Types.ObjectId,
         ref: 'Pedido'
