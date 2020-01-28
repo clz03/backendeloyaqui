@@ -14,7 +14,9 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid }).sort({data: -1});
+        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid })
+        .sort({data: -1})
+        .limit(20);
         return res.json(returnShow)
     },
 
