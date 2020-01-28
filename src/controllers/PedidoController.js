@@ -13,6 +13,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyestab(req, res){
+        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid });
+        return res.json(returnShow)
+    },
+
     async showbyuser(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
