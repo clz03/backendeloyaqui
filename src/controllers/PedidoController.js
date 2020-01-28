@@ -14,7 +14,7 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid });
+        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid }).sort({data: -1});
         return res.json(returnShow)
     },
 
@@ -28,7 +28,8 @@ module.exports = {
         const returnShow = await Pedido.find({ idusuario: req.params.id })
         .skip((page -1) * pagination)
         .limit(pagination)
-        .populate('idestabelecimento','nome');
+        .populate('idestabelecimento','nome')
+        .sort({data: -1});
 
         var result = {
             "totalRecords" : totalCount,
