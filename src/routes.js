@@ -140,6 +140,7 @@ routes.delete('/pedidos/:id', PedidoController.delete);
 routes.post('/itenspedido', ItensPedidoController.store);
 routes.get('/itenspedido', ItensPedidoController.index);
 routes.get('/itenspedido/:id', ItensPedidoController.show);
+routes.get('/itenspedido/pedido/:id', ItensPedidoController.showbyorder);
 routes.put('/itenspedido/:id', ItensPedidoController.update);
 routes.delete('/itenspedido/:id', ItensPedidoController.delete);
 

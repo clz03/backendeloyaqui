@@ -12,6 +12,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyorder(req, res){
+        const returnShow = await ItemPedido.find({ idpedido: req.params.id });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await ItemPedido.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
