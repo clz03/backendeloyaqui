@@ -9,7 +9,8 @@ module.exports = {
     },
 
     async show(req, res){
-        const returnShow = await Pedido.find({ _id: req.params.id });
+        const returnShow = await Pedido.find({ _id: req.params.id })
+        .populate('idusuario');
         return res.json(returnShow)
     },
 
