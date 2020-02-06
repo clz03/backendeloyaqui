@@ -23,8 +23,8 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const ano_atual = 2019;
-        const ano_proximo = 2020;
+        const ano_atual = 2020;
+        const ano_proximo = 2021;
 
         const mes_atual = req.params.mes;
         const mes_proximo = mes_atual == '12' ? '01' : parseInt(mes_atual) + 1;
