@@ -1,5 +1,6 @@
 const Pedido = require('../model/Pedido');
 const ItemPedido = require('../model/ItensPedido');
+const { findConnections, sendMessage } = require('../websocket')
 
 module.exports = {
 
@@ -44,6 +45,10 @@ module.exports = {
 
     async update(req, res){
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
+
+        const sendSocketMessageTo = findConnections(idestabelecimento);
+        sendMessage(sendSocketMessageTo, 'status-ped', req.body);
+
         return res.json(returnUpdate)
     },
 
@@ -74,11 +79,10 @@ module.exports = {
         });
 
         const { itensPed } = req.body;
-
         const order = await Pedido.findOne({ data, idusuario });
 
         itensPed.forEach(async function(item){
-            await ItemPedido.create({
+           await ItemPedido.create({
                 item:item.item, 
                 valorun: item.valorun,
                 valortotal: item.valortotal,
@@ -87,6 +91,9 @@ module.exports = {
                 idpedido: order._id
             });            
         });
+
+        const sendSocketMessageTo = findConnections(idestabelecimento);
+        sendMessage(sendSocketMessageTo, 'novo-ped', status);
 
         return res.json(returnPost);
     },
