@@ -13,7 +13,7 @@ exports.setupWebsocket = (server) => {
             id: socket.id,
             idestab: idestab
         });
-        console.log(socket.id);
+        //console.log(socket.id);
     });
 };
 
