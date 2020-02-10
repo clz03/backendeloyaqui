@@ -1,6 +1,10 @@
 const { Schema, model} = require('mongoose');
 
 const PedidoSchema = new Schema({
+    seq: {
+        type: Number,
+        required: true
+    },
     data: {
         type: Date,
         required: true

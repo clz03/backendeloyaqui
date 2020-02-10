@@ -94,6 +94,10 @@ const EstabelecimentoSchema = new Schema({
     hrfim_domingo: {
         type: Number
     },
+    views: {
+        type: Number,
+        default: 1
+    },
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'

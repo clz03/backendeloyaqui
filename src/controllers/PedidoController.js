@@ -1,6 +1,7 @@
 const Pedido = require('../model/Pedido');
 const ItemPedido = require('../model/ItensPedido');
-const { findConnections, sendMessage } = require('../websocket')
+const NumeroPedido = require('../model/NumeroPedido');
+const { findConnections, findConnectionsUser ,sendMessage } = require('../websocket')
 
 module.exports = {
 
@@ -44,10 +45,11 @@ module.exports = {
     },
 
     async update(req, res){
+        const { idusuario } = req.body;
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
 
-        const sendSocketMessageTo = findConnections(idestabelecimento);
-        sendMessage(sendSocketMessageTo, 'status-ped', req.body);
+        const sendSocketMessageTo = findConnectionsUser(idusuario);
+        sendMessage(sendSocketMessageTo, 'status-ped', idusuario);
 
         return res.json(returnUpdate)
     },
@@ -60,7 +62,11 @@ module.exports = {
    async store(req, res) {
         const { data, status, subtotal, taxaentrega, total, tipopag, tipoentrega, apelido, rua, numero, bairro, cep, complemento,idestabelecimento, idusuario } = req.body;
 
+        const sequence = await NumeroPedido.findOneAndUpdate({ _id: 'entityID' }, { $inc: { seq: 1 } }, { new: true });
+        const seq = sequence.seq;
+
         const returnPost = await Pedido.create({
+            seq,
             data, 
             status, 
             subtotal, 
@@ -79,7 +85,8 @@ module.exports = {
         });
 
         const { itensPed } = req.body;
-        const order = await Pedido.findOne({ data, idusuario });
+
+        const order = await Pedido.findOne({ numero, idusuario });
 
         itensPed.forEach(async function(item){
            await ItemPedido.create({

@@ -16,6 +16,7 @@ const CardapioController = require('./controllers/CardapioController.js');
 const EnderecoController = require('./controllers/EnderecoController.js');
 const PedidoController = require('./controllers/PedidoController.js');
 const ItensPedidoController = require('./controllers/ItensPedidoController.js');
+const NumeroPedidoController = require('./controllers/NumeroPedidoController.js');
 
 const routes = express.Router();
 
@@ -144,5 +145,11 @@ routes.get('/itenspedido/:id', ItensPedidoController.show);
 routes.get('/itenspedido/pedido/:id', ItensPedidoController.showbyorder);
 routes.put('/itenspedido/:id', ItensPedidoController.update);
 routes.delete('/itenspedido/:id', ItensPedidoController.delete);
+
+routes.post('/numeropedido', NumeroPedidoController.store);
+routes.get('/numeropedido', NumeroPedidoController.index);
+routes.get('/numeropedido/:id', NumeroPedidoController.show);
+routes.put('/numeropedido/:id', NumeroPedidoController.update);
+routes.delete('/numeropedido/:id', NumeroPedidoController.delete);
 
 module.exports = routes;

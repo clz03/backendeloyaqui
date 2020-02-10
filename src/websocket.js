@@ -7,19 +7,27 @@ exports.setupWebsocket = (server) => {
     io = socketio(server);
 
     io.on('connection', socket => {
-      const { idestab } = socket.handshake.query;
+      const { idestab, idusuario } = socket.handshake.query;
 
         connections.push({
             id: socket.id,
-            idestab: idestab
+            idestab: idestab,
+            idusuario: idusuario
         });
-        //console.log(socket.id);
+        console.log(idusuario);
+        console.log(socket.id);
     });
 };
 
 exports.findConnections = (idestab) => {
     return connections.filter(connection => {
         return idestab === connection.idestab
+    })
+};
+
+exports.findConnectionsUser = (idusuario) => {
+    return connections.filter(connection => {
+        return idusuario === connection.idusuario
     })
 };
 

@@ -19,7 +19,8 @@ module.exports = {
 
     async show(req, res){
         const returnShow = await Estabelecimento.find({ _id: req.params.id });
-        return res.json(returnShow)
+        await Estabelecimento.findOneAndUpdate({ _id: req.params.id  }, { $inc: { views: 1 } });
+        return res.json(returnShow);
     },
 
     async showbycat(req, res){
