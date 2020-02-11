@@ -33,7 +33,7 @@ module.exports = {
         const returnShow = await Pedido.find({ idusuario: req.params.id })
         .skip((page -1) * pagination)
         .limit(pagination)
-        .populate('idestabelecimento','nome')
+        .populate('idestabelecimento','nome imagem')
         .sort({data: -1});
 
         var result = {
