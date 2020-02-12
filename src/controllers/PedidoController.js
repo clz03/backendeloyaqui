@@ -64,7 +64,8 @@ module.exports = {
         const data = {
             "to": "ExponentPushToken[nx0IlwJamJz4PitzUxVBK0]",
             "sound": "default",
-            "body": "Hello world!"
+            "body": "Hello world!",
+            "_displayInForeground": "true"
         }
 
         axios.post('https://exp.host/--/api/v2/push/send', data, {
