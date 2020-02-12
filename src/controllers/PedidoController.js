@@ -1,6 +1,7 @@
 const Pedido = require('../model/Pedido');
 const ItemPedido = require('../model/ItensPedido');
 const NumeroPedido = require('../model/NumeroPedido');
+const axios = require('axios')
 const { findConnections, findConnectionsUser ,sendMessage } = require('../websocket')
 
 module.exports = {
@@ -45,11 +46,30 @@ module.exports = {
     },
 
     async update(req, res){
+
         const { idusuario } = req.body;
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
 
+        //Envia reload para o mobile
         const sendSocketMessageTo = findConnectionsUser(idusuario);
         sendMessage(sendSocketMessageTo, 'status-ped', idusuario);
+
+        const headers = {
+            host: 'exp.host',
+            Accept: 'application/json',
+            'Accept-encoding': 'gzip, deflate',
+            'Content-Type': 'application/json'
+        }
+
+        const data = {
+            "to": "ExponentPushToken[nx0IlwJamJz4PitzUxVBK0]",
+            "sound": "default",
+            "body": "Hello world!"
+        }
+
+        axios.post('https://exp.host/--/api/v2/push/send', data, {
+            headers: headers
+        })
 
         return res.json(returnUpdate)
     },
