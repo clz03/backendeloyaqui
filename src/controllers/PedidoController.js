@@ -62,12 +62,13 @@ module.exports = {
         }
 
         const data = {
-            "to": "ExponentPushToken[nx0IlwJamJz4PitzUxVBK0]",
+            "to": "ExponentPushToken[CS4_DQACSUXF5l15ERWlvb]",
             "sound": "default",
             "body": "Hello world!",
             "_displayInForeground": "true"
         }
 
+        //Envia push notification para o mobile
         axios.post('https://exp.host/--/api/v2/push/send', data, {
             headers: headers
         })
