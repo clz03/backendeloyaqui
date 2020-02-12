@@ -18,7 +18,10 @@ const UsuarioSchema = new Schema({
     },
     telefone: {
         type: String
-    }
+    },
+    pushToken: {
+        type: String
+    },
 }, {
     timestamps: true
 });
