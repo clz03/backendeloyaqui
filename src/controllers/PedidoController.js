@@ -60,7 +60,7 @@ module.exports = {
     },
 
    async store(req, res) {
-        const { data, status, subtotal, taxaentrega, total, tipopag, tipoentrega, apelido, rua, numero, bairro, cep, complemento,idestabelecimento, idusuario } = req.body;
+        const { data, status, subtotal, taxaentrega, total, tipopag, troco, tipoentrega, apelido, rua, numero, bairro, cep, complemento,idestabelecimento, idusuario } = req.body;
 
         const sequence = await NumeroPedido.findOneAndUpdate({ _id: 'entityID' }, { $inc: { seq: 1 } }, { new: true });
         const seq = sequence.seq;
@@ -73,6 +73,7 @@ module.exports = {
             taxaentrega, 
             total, 
             tipopag, 
+            troco,
             tipoentrega,
             apelido,
             rua,

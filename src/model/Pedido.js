@@ -33,6 +33,9 @@ const PedidoSchema = new Schema({
         type: String,
         required: true
     },
+    troco: {
+        type: Number
+    },
     apelido: {
         type: String
     },
