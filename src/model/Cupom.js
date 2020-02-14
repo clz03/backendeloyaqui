@@ -15,6 +15,10 @@ const CupomSchema = new Schema({
     expirado: {
         type: Boolean
     },
+    utilizado: {
+        type: Boolean,
+        default: false
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
