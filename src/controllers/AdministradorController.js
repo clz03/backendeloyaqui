@@ -25,6 +25,9 @@ module.exports = {
         const hashEmail  = CryptoJS.AES.decrypt(email, 'senhaforte').toString(CryptoJS.enc.Utf8);
         const hashPwd  = CryptoJS.AES.decrypt(senha, 'senhaforte').toString(CryptoJS.enc.Utf8);
 
+        console.log(hashEmail);
+        console.log(hashPwd);
+
         const user = await Administrador.findOne({ hashEmail });
 
         if (!user)
