@@ -30,7 +30,7 @@ module.exports = {
             path: 'idcupom',
             match: { validade: { "$gte": yesterday }}
         })
-        .populate('idestabelecimento');
+        .populate('idusuario');
         return res.json(returnShow)
     },
 
