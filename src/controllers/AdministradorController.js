@@ -1,6 +1,7 @@
 const Administrador = require('../model/Administrador');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
+var SHA256 = require('crypto-js/sha256');
 
 module.exports = {
 
@@ -19,12 +20,15 @@ module.exports = {
 
         const { email, senha } = req.body;
 
-        const user = await Administrador.findOne({ email });
+        const hashEmail = SHA256.decrypt(email);
+        const hashpwd = SHA256.decrypt(senha);
+
+        const user = await Administrador.findOne({ hashEmail });
 
         if (!user)
             return res.status(200).send({ error: "Usuário/Senha inválida"});
 
-        if (senha != user.pwd)
+        if (hashpwd != user.pwd)
             return res.status(200).send({ error: "Usuário/Senha inválida"});
 
         user.pwd = undefined;
