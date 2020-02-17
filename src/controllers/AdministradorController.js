@@ -22,8 +22,8 @@ module.exports = {
          
         const skey = process.env.SECRET_KEY;
 
-        const hashEmail  = CryptoJS.AES.decrypt(email, skey);
-        const hashPwd  = CryptoJS.AES.decrypt(senha, skey);     
+        const hashEmail  = CryptoJS.AES.decrypt(email, 'senhaforte');
+        const hashPwd  = CryptoJS.AES.decrypt(senha, 'senhaforte');     
 
         const user = await Administrador.findOne({ hashEmail });
 
