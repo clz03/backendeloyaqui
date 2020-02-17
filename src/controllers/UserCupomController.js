@@ -23,6 +23,17 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyestab(req, res){
+        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        const returnShow = await UserCupom.find({ idestabelecimento: req.params.id })
+        .populate({
+            path: 'idcupom',
+            match: { validade: { "$gte": yesterday }}
+        })
+        .populate('idestabelecimento');
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await UserCupom.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)
