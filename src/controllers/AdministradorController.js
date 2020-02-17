@@ -28,7 +28,7 @@ module.exports = {
         console.log(hashEmail);
         console.log(hashPwd);
 
-        const user = await Administrador.findOne({ hashEmail });
+        const user = await Administrador.findOne({ email: hashEmail });
 
         if (!user)
             return res.status(200).send({ error: "Usuário/Senha inválida"});
