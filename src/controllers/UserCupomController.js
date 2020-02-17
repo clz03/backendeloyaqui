@@ -19,7 +19,8 @@ module.exports = {
             path: 'idcupom',
             match: { validade: { "$gte": yesterday }}
         })
-        .populate('idestabelecimento');
+        .populate('idestabelecimento')
+        .sort({createdAt: -1});
         return res.json(returnShow)
     },
 
@@ -30,7 +31,8 @@ module.exports = {
             path: 'idcupom',
             match: { validade: { "$gte": yesterday }}
         })
-        .populate('idusuario');
+        .populate('idusuario')
+        .sort({createdAt: -1});
         return res.json(returnShow)
     },
 
