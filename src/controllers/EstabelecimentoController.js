@@ -66,9 +66,9 @@ module.exports = {
         const page = req.query.page ? parseInt(req.query.page) : 1;
         var totalCount = 0;
 
-        totalCount = await Estabelecimento.countDocuments({ delivery: true });
+        totalCount = await Estabelecimento.countDocuments({ delivery: true, online: true });
 
-        const returnShow = await Estabelecimento.find({ delivery: true })
+        const returnShow = await Estabelecimento.find({ delivery: true, online: true })
         .skip((page -1) * pagination)
         .limit(pagination);
 
