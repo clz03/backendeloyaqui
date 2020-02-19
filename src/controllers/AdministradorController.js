@@ -1,4 +1,5 @@
 const Administrador = require('../model/Administrador');
+const Estabelecimento = require('../model/Estabelecimento');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 var CryptoJS = require("crypto-js");
@@ -34,6 +35,8 @@ module.exports = {
             return res.status(200).send({ error: "Usuário/Senha inválida"});
 
         user.pwd = undefined;
+
+        await Estabelecimento.findOneAndUpdate({ _id: user.idestabelecimento }, { online: 1 });
 
         return res.json(user)
     },
