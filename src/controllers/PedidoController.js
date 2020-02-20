@@ -1,6 +1,7 @@
 const Pedido = require('../model/Pedido');
 const ItemPedido = require('../model/ItensPedido');
 const NumeroPedido = require('../model/NumeroPedido');
+const Usuario = require('../model/Usuario');
 const axios = require('axios')
 const { findConnections, findConnectionsUser ,sendMessage } = require('../websocket')
 
@@ -50,28 +51,33 @@ module.exports = {
         const { idusuario } = req.body;
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
 
+        const pushUser = Usuario.findOne({_id: idusuario});
+
         //Envia reload para o mobile
         const sendSocketMessageTo = findConnectionsUser(idusuario);
         sendMessage(sendSocketMessageTo, 'status-ped', idusuario);
 
-        const headers = {
-            host: 'exp.host',
-            Accept: 'application/json',
-            'Accept-encoding': 'gzip, deflate',
-            'Content-Type': 'application/json'
-        }
+        if (pushUser.pushToken) {
 
-        const data = {
-            "to": "ExponentPushToken[CS4_DQACSUXF5l15ERWlvb]",
-            "sound": "default",
-            "body": "Hello world!",
-            "_displayInForeground": "true"
-        }
+            const headers = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
 
-        //Envia push notification para o mobile
-        axios.post('https://exp.host/--/api/v2/push/send', data, {
-            headers: headers
-        })
+            const data = {
+                "to": pushUser.pushToken,
+                "sound": "default",
+                "body": "Hello world!",
+                "_displayInForeground": "true"
+            }
+
+            //Envia push notification para o mobile
+            axios.post('https://exp.host/--/api/v2/push/send', data, {
+                headers: headers
+            })
+        };
 
         return res.json(returnUpdate)
     },
