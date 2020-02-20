@@ -51,7 +51,7 @@ module.exports = {
         const { idusuario } = req.body;
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
 
-        const pushUser = Usuario.findOne({_id: idusuario});
+        const pushUser = Usuario.findOne({ _id: idusuario });
 
         //Envia reload para o mobile
         const sendSocketMessageTo = findConnectionsUser(idusuario);
@@ -69,7 +69,8 @@ module.exports = {
             const data = {
                 "to": pushUser.pushToken,
                 "sound": "default",
-                "body": "Hello world!",
+                "title":"Seu pedido foi atualizado",
+                "body": "Estamos preparando seu pedido. Em breve sairá para entrega",
                 "_displayInForeground": "true"
             }
 
@@ -128,6 +129,7 @@ module.exports = {
             });            
         });
 
+        //Envia reload para o front-end
         const sendSocketMessageTo = findConnections(idestabelecimento);
         sendMessage(sendSocketMessageTo, 'novo-ped', status);
 
