@@ -13,13 +13,14 @@ module.exports = {
     },
 
     async showbyuser(req, res){
-        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        // var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
         const returnShow = await UserCupom.find({ idusuario: req.params.id })
         .populate({
             path: 'idcupom',
-            match: { validade: { "$gte": yesterday }}
+            // match: { validade: { "$gte": yesterday }}
         })
-        .populate('idestabelecimento');
+        .populate('idestabelecimento')
+        .sort({createdAt: -1});
         return res.json(returnShow)
     },
 
@@ -36,7 +37,8 @@ module.exports = {
     async store(req, res) {
         const { idusuario, idcupom, idestabelecimento, utilizado } = req.body;
 
-        const countCupom = await UserCupom.countDocuments({ idusuario: idusuario, idcupom: idcupom })
+        const countCupom = await UserCupom.countDocuments({ idusuario: idusuario, idcupom: idcupom, utilizado: false })
+
         if(countCupom < 1){
             const returnPost = UserCupom.create({
                 idusuario,
