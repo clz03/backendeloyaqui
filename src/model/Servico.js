@@ -5,20 +5,25 @@ const ServicoSchema = new Schema({
         type: String,
         required: true
     },
-    descr: {
-        type: String,
-        required: true
-    },
     preco: {
-        type: String,
-        required: true
+        type: String
     },
     imagem: {
+        type: String
+    },
+    promocao: {
+        type: Boolean
+    },
+    diasemana: {
         type: String,
         required: true
     },
-    promocao: {
-        type: Boolean,
+    hrinicio: {
+        type: String,
+        required: true
+    },
+    hrfim: {
+        type: String,
         required: true
     },
     idestabelecimento: {
