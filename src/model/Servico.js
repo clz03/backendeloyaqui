@@ -19,7 +19,7 @@ const ServicoSchema = new Schema({
         type: Boolean
     },
     diasemana: {
-        type: Number,
+        type: String,
         required: true
     },
     hrinicio: {
