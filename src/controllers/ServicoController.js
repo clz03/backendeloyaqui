@@ -14,7 +14,7 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const returnShow = await Servico.find({ idestabelecimento: req.params.idestabelecimento });
+        const returnShow = await Servico.find({ idestabelecimento: req.params.id });
         return res.json(returnShow)
     },
 
