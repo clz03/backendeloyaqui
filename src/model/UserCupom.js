@@ -14,7 +14,8 @@ const UserCupomSchema = new Schema({
         ref: 'Estabelecimento'
     },
     utilizado: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

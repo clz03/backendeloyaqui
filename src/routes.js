@@ -96,6 +96,7 @@ routes.post('/usercupons', UserCupomController.store);
 routes.get('/usercupons', UserCupomController.index);
 routes.get('/usercupons/:id', UserCupomController.show);
 routes.get('/usercupons/usuario/:id', UserCupomController.showbyuser);
+routes.get('/usercupons/estabelecimento/:id', UserCupomController.showbyestab);
 routes.put('/usercupons/:id', UserCupomController.update);
 routes.delete('/usercupons/:id', UserCupomController.delete);
 

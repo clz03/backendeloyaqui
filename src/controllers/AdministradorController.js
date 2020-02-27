@@ -1,6 +1,8 @@
 const Administrador = require('../model/Administrador');
+const Estabelecimento = require('../model/Estabelecimento');
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
+var CryptoJS = require("crypto-js");
 
 module.exports = {
 
@@ -18,16 +20,23 @@ module.exports = {
     async authenticate(req, res){
 
         const { email, senha } = req.body;
+         
+        const skey = process.env.SECRET_KEY;
 
-        const user = await Administrador.findOne({ email });
+        const hashEmail  = CryptoJS.AES.decrypt(email, skey).toString(CryptoJS.enc.Utf8);
+        const hashPwd  = CryptoJS.AES.decrypt(senha, skey).toString(CryptoJS.enc.Utf8);
+
+        const user = await Administrador.findOne({ email: hashEmail });
 
         if (!user)
             return res.status(200).send({ error: "Usuário/Senha inválida"});
 
-        if (senha != user.pwd)
+        if (hashPwd != user.pwd)
             return res.status(200).send({ error: "Usuário/Senha inválida"});
 
         user.pwd = undefined;
+
+        await Estabelecimento.findOneAndUpdate({ _id: user.idestabelecimento }, { online: 1 });
 
         return res.json(user)
     },

@@ -98,6 +98,9 @@ const EstabelecimentoSchema = new Schema({
         type: Number,
         default: 1
     },
+    online: {
+        type: Boolean
+    },
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'

@@ -21,6 +21,21 @@ module.exports = {
         })
         .populate('idestabelecimento')
         .sort({createdAt: -1});
+<<<<<<< HEAD
+=======
+        return res.json(returnShow)
+    },
+
+    async showbyestab(req, res){
+        var yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+        const returnShow = await UserCupom.find({ idestabelecimento: req.params.id })
+        .populate({
+            path: 'idcupom',
+            match: { validade: { "$gte": yesterday }}
+        })
+        .populate('idusuario')
+        .sort({createdAt: -1});
+>>>>>>> d449b4ab0520318bb57376480355fb9e9eaf46ec
         return res.json(returnShow)
     },
 

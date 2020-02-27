@@ -22,8 +22,7 @@ const EnderecoSchema = new Schema({
         required: true
     },
     complemento: {
-        type: String,
-        required: true
+        type: String
     },
     idusuario: {
         type: Schema.Types.ObjectId,
