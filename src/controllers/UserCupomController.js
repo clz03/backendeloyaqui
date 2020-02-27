@@ -21,8 +21,6 @@ module.exports = {
         })
         .populate('idestabelecimento')
         .sort({createdAt: -1});
-<<<<<<< HEAD
-=======
         return res.json(returnShow)
     },
 
@@ -35,7 +33,6 @@ module.exports = {
         })
         .populate('idusuario')
         .sort({createdAt: -1});
->>>>>>> d449b4ab0520318bb57376480355fb9e9eaf46ec
         return res.json(returnShow)
     },
 

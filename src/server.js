@@ -8,9 +8,14 @@ const { setupWebsocket } = require('./websocket');
 const app = express();
 const server = http.Server(app);
 
-mongoose.connect(process.env.DATABASE_URI, {
-    useNewUrlParser:true,
-    useUnifiedTopology: true
+// mongoose.connect(process.env.DATABASE_URI, {
+//     useNewUrlParser:true,
+//     useUnifiedTopology: true
+// });
+
+mongoose.connect('mongodb+srv://eloyaqui:a2s3d4@eloyaquidb-ynayq.mongodb.net/eloyaquidb1?retryWrites=true&w=majority', {
+    useNewUrlParser:true,
+    useUnifiedTopology: true
 });
 
 setupWebsocket(server);
