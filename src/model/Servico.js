@@ -5,6 +5,10 @@ const ServicoSchema = new Schema({
         type: String,
         required: true
     },
+    descr: {
+        type: String,
+        required: true
+    },
     preco: {
         type: String
     },

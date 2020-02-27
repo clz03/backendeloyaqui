@@ -31,10 +31,11 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, preco, imagem, promocao, diasemana, hrinicio, hrfim, idestabelecimento } = req.body;
+        const { nome, descr, preco, imagem, promocao, diasemana, hrinicio, hrfim, idestabelecimento } = req.body;
 
         const returnPost = Servico.create({
             nome, 
+            descr,
             preco, 
             imagem, 
             promocao,
