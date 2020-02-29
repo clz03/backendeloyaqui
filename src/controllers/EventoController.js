@@ -195,6 +195,9 @@ module.exports = {
     async store(req, res) {
         const { data, hora, comentario, idestabelecimento, idservico ,idusuario } = req.body;
 
+        const returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
+        if(returnEventos.length > 0) return res.json(false);
+
         const returnPost = Evento.create({
             data,
             hora,
