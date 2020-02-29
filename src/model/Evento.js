@@ -17,6 +17,10 @@ const EventoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
     },
+    idservico: {
+        type: Schema.Types.ObjectId,
+        ref: 'Servico'
+    },
     idusuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
