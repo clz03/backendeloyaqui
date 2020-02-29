@@ -122,9 +122,15 @@ module.exports = {
         var jsonArr = [];
         var jsonEventos = [];
         var status;
+        var returnEventos
         
-        const returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.servico });
         const returnSlots = await Servico.findById({ _id: req.params.servico });
+
+        if(returnSlots.markIndisp === true){
+            returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.servico });
+        } else {
+            returnEventos = '';
+        }
 
         //Horarios já preenchidos nesse dia
         if (returnEventos.length > 0){

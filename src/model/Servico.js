@@ -30,6 +30,11 @@ const ServicoSchema = new Schema({
         type: String,
         required: true
     },
+    markIndisp: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
