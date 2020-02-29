@@ -121,6 +121,7 @@ module.exports = {
 
         var jsonArr = [];
         var jsonEventos = [];
+        var status;
         
         const returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.servico });
         const returnSlots = await Servico.findById({ _id: req.params.servico });
@@ -145,10 +146,10 @@ module.exports = {
         //         }
         //     }
         // }
-
+        
         //Horarios livers ja informando quais estão ocupados
         for (var i = returnSlots.hrinicio; i <= returnSlots.hrfim; i++) {
-            var status = jsonEventos.includes(i) ? 'I' : 'D';
+            status = jsonEventos.includes(parseInt(i)) ? 'I' : 'D';
             jsonArr.push({
                 id: req.params.data + i,
                 data: req.params.data,
