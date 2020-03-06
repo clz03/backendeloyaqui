@@ -13,6 +13,11 @@ const UsuarioSchema = new Schema({
         type: Boolean,
         required: true
     },
+    admin: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     nome: {
         type: String
     },
@@ -22,6 +27,10 @@ const UsuarioSchema = new Schema({
     pushToken: {
         type: String
     },
+    idestabelecimento: {
+        type: Schema.Types.ObjectId,
+        ref: 'Estabelecimento'
+    }
 }, {
     timestamps: true
 });

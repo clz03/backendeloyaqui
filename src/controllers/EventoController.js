@@ -271,6 +271,30 @@ module.exports = {
            }
         });
 
+        if (user.pushToken) {
+
+            const headers = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
+
+            const data = {
+                "to": pushUser.pushToken,
+                "sound": "default",
+                "title":"Novo Agendamento em " + estab.nome +  " ✔",
+                "body": user.nome + " agendou para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora,
+                "_displayInForeground": "true"
+            }
+
+            //Envia push notification para o mobile
+            axios.post('https://exp.host/--/api/v2/push/send', data, {
+                headers: headers
+            })
+        };
+
+
         return res.json(returnPost);
     },
 

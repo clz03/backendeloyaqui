@@ -21,6 +21,12 @@ const AdministradorSchema = new Schema({
     nome: {
         type: String
     },
+    telefone: {
+        type: String
+    },
+    pushToken: {
+        type: String
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
