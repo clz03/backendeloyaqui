@@ -40,7 +40,8 @@ module.exports = {
                 "$lt": data_lt
             } 
             })
-            .populate('idusuario');
+            .populate('idusuario')
+            .populate('idservico');
 
         return res.json(returnShow);
     },
