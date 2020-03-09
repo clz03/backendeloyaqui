@@ -39,6 +39,9 @@ const EstabelecimentoSchema = new Schema({
         type: String,
         required: true
     },
+    complemento: {
+        type: String
+    },
     fone1: {
         type: String,
         required: true
