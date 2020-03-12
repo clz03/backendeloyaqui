@@ -97,6 +97,22 @@ const EstabelecimentoSchema = new Schema({
     hrfim_domingo: {
         type: Number
     },
+    pedidominimo: {
+        type: Number,
+        default: 0
+    },
+    taxaentrega: {
+        type: Number,
+        default: 0
+    },
+    tempoentrega: {
+        type: Number,
+        default: 0
+    },
+    temporetira: {
+        type: Number,
+        default: 0
+    },
     views: {
         type: Number,
         default: 1
