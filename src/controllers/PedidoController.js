@@ -21,7 +21,16 @@ module.exports = {
     async showbyestab(req, res){
         const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid })
         .sort({data: -1})
-        .limit(20);
+        .limit(40);
+        return res.json(returnShow)
+    },
+
+    async showbyestabtoday(req, res){
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        
+        const returnShow = await Pedido.find({ idestabelecimento: req.params.estabid, data: { "$gte": today } })
+        .sort({data: -1});
         return res.json(returnShow)
     },
 

@@ -137,6 +137,7 @@ routes.get('/pedidos', PedidoController.index);
 routes.get('/pedidos/:id', PedidoController.show);
 routes.get('/pedidos/usuario/:id', PedidoController.showbyuser);
 routes.get('/pedidos/estabelecimento/:estabid', PedidoController.showbyestab);
+routes.get('/pedidos/estabelecimento/hoje/:estabid', PedidoController.showbyestabtoday);
 routes.put('/pedidos/:id', PedidoController.update);
 routes.delete('/pedidos/:id', PedidoController.delete);
 
