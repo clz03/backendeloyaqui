@@ -113,6 +113,14 @@ const EstabelecimentoSchema = new Schema({
         type: Number,
         default: 0
     },
+    entrega: {
+        type: Boolean,
+        default: false
+    },
+    retira: {
+        type: Boolean,
+        default: false
+    },
     views: {
         type: Number,
         default: 1
