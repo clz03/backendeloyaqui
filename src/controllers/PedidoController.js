@@ -138,6 +138,31 @@ module.exports = {
             });            
         });
 
+        const pushUser = Usuario.findOne({ _id: idusuario });
+
+        if (pushUser.pushToken) {
+
+            const headers = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
+
+            const data = {
+                "to": pushUser.pushToken,
+                "sound": "default",
+                "title":"Recebemos seu pedido !",
+                "body": "Recebemos seu pedido. Acompanhe o status do seu pedido até a entrega",
+                "_displayInForeground": "true"
+            }
+
+            //Envia push notification para o mobile
+            axios.post('https://exp.host/--/api/v2/push/send', data, {
+                headers: headers
+            })
+        };
+
         //Envia reload para o front-end
         const sendSocketMessageTo = findConnections(idestabelecimento);
         sendMessage(sendSocketMessageTo, 'novo-ped', status);
