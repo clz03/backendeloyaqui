@@ -125,7 +125,7 @@ module.exports = {
 
         const { itensPed } = req.body;
 
-        const order = await Pedido.findOne({ numero, idusuario });
+        const order = await Pedido.findOne({ seq, idusuario });
 
         itensPed.forEach(async function(item){
            await ItemPedido.create({
