@@ -60,7 +60,7 @@ module.exports = {
         const { idusuario } = req.body;
         const returnUpdate = await Pedido.updateOne({ _id: req.params.id },req.body);
 
-        const pushUser = Usuario.findOne({ _id: idusuario });
+        const pushUser = await Usuario.findOne({ _id: idusuario });
 
         //Envia reload para o mobile
         const sendSocketMessageTo = findConnectionsUser(idusuario);
@@ -138,7 +138,7 @@ module.exports = {
             });            
         });
 
-        const pushUser = Usuario.findOne({ _id: idusuario });
+        const pushUser = await Usuario.findOne({ _id: idusuario });
 
         if (pushUser.pushToken) {
 
