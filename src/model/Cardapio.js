@@ -16,6 +16,50 @@ const CardapioSchema = new Schema({
         type: String,
         required: true
     },
+    tseg: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tter: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tqua: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tqui: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tsex: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tsab: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    tdom: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    compl1: {
+        type: String
+    },
+    compl2: {
+        type: String
+    },
+    compl3: {
+        type: String
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
