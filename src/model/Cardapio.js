@@ -51,6 +51,11 @@ const CardapioSchema = new Schema({
         required: true,
         default: true
     },
+    tmeia: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     compl1: {
         type: String
     },
