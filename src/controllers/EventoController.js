@@ -287,7 +287,7 @@ module.exports = {
             const datastore = {
                 "to": user.pushToken,
                 "sound": "default",
-                "title":"Agendamento realizado! ✔",
+                "title":"Agendamento realizado!",
                 "body": "Agendado em " + estab.nome +" no dia " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
                 "_displayInForeground": "true"
             }
@@ -301,6 +301,13 @@ module.exports = {
 
         if (userEstab.length > 0) {
 
+            const headers2 = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
+
             const datastore2 = {
                 "to": userEstab[0].pushToken,
                 "sound": "default",
@@ -311,7 +318,7 @@ module.exports = {
 
             //Envia push notification para o mobile
             axios.post('https://exp.host/--/api/v2/push/send', datastore2, {
-                headers: headers
+                headers: headers2
             });
             
         };
