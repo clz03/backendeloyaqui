@@ -299,10 +299,10 @@ module.exports = {
             
         };
 
-        if (userEstab[0].pushToken.length > 0) {
+        if (userEstab.length > 0) {
 
             const datastore2 = {
-                "to": userEstab.pushToken,
+                "to": userEstab[0].pushToken,
                 "sound": "default",
                 "title": "Novo Agendamento " + estab.nome,
                 "body": "Cliente " + user.nome +" agendou para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
