@@ -272,6 +272,7 @@ module.exports = {
         //    }
         // });
 
+
         if (user.pushToken.length > 0) {
 
             const headers = {
@@ -281,7 +282,7 @@ module.exports = {
                 'Content-Type': 'application/json'
             }
 
-            const data = {
+            const datastore = {
                 "to": user.pushToken,
                 "sound": "default",
                 "title":"Agendamento confirmado (" + estab.nome +  ") ✔",
@@ -290,7 +291,7 @@ module.exports = {
             }
 
             //Envia push notification para o mobile
-            axios.post('https://exp.host/--/api/v2/push/send', data, {
+            axios.post('https://exp.host/--/api/v2/push/send', datastore, {
                 headers: headers
             })
         };
