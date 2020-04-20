@@ -301,13 +301,6 @@ module.exports = {
 
         if (userEstab.pushToken.length > 0) {
 
-            const headers = {
-                host: 'exp.host',
-                Accept: 'application/json',
-                'Accept-encoding': 'gzip, deflate',
-                'Content-Type': 'application/json'
-            }
-
             const datastore2 = {
                 "to": userEstab.pushToken,
                 "sound": "default",
