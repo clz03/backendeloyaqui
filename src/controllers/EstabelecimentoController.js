@@ -61,6 +61,39 @@ module.exports = {
         return res.json(result)
     },
 
+    async showbyagendaSearch(req, res){
+        const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
+        var totalCount = 0;
+
+        totalCount = await Estabelecimento.countDocuments(
+            { agendamento: '1',  $or: [ 
+                    {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
+                    {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
+                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
+                ]
+            }
+        )
+
+        const returnShow = await Estabelecimento.find(
+            { agendamento: '1', $or: [ 
+                    {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}, 
+                    {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
+                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
+                ]
+            }
+        )
+        .skip((page -1) * pagination)
+        .limit(pagination);
+
+        var result = {
+            "totalRecords" : totalCount,
+            "result": returnShow
+        };
+
+        return res.json(result)
+    },
+
     async showbydelivery(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
