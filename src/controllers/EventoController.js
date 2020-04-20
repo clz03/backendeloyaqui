@@ -198,7 +198,7 @@ module.exports = {
         const { data, hora, comentario, idestabelecimento, idservico ,idusuario } = req.body;
 
         const returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
-        //if(returnEventos.length > 0) return res.json(false);
+        if(returnEventos.length > 0) return res.json(false);
 
         const returnPost = await Evento.create({
             data,
@@ -210,7 +210,7 @@ module.exports = {
         });
 
         const user = await Usuario.findById({ _id: idusuario });
-        const userEstab = await Usuario.findById({ idestabelecimento: idestabelecimento });
+        const userEstab = await Usuario.find({ idestabelecimento: idestabelecimento });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
 
         // let transporter = nodemailer.createTransport({
