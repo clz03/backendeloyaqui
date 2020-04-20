@@ -128,6 +128,8 @@ module.exports = {
         
         const returnSlots = await Servico.findById({ _id: req.params.servico });
 
+
+
         if(returnSlots.markIndisp === true){
             returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.servico });
         } else {
@@ -154,9 +156,9 @@ module.exports = {
         //         }
         //     }
         // }
-        
+
         //Horarios livres ja informando quais estão ocupados
-        for (var i = returnSlots.hrinicio; i <= returnSlots.hrfim; i++) {
+        for (var i = parseInt(returnSlots.hrinicio); i <= parseInt(returnSlots.hrfim); i++) {
             status = jsonEventos.includes(parseInt(i)) ? 'I' : 'D';
             jsonArr.push({
                 id: req.params.data + i,
