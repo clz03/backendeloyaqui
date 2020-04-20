@@ -210,6 +210,7 @@ module.exports = {
         });
 
         const user = await Usuario.findById({ _id: idusuario });
+        const userEstab = await Usuario.findById({ idestabelecimento: idestabelecimento });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
 
         // let transporter = nodemailer.createTransport({
@@ -293,6 +294,30 @@ module.exports = {
 
             //Envia push notification para o mobile
             axios.post('https://exp.host/--/api/v2/push/send', datastore, {
+                headers: headers
+            });
+            
+        };
+
+        if (userEstab.pushToken.length > 0) {
+
+            const headers = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
+
+            const datastore2 = {
+                "to": userEstab.pushToken,
+                "sound": "default",
+                "title": "Novo Agendamento " + estab.nome,
+                "body": "Cliente " + user.nome +" agendou para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
+                "_displayInForeground": "true"
+            }
+
+            //Envia push notification para o mobile
+            axios.post('https://exp.host/--/api/v2/push/send', datastore2, {
                 headers: headers
             });
             
