@@ -272,7 +272,7 @@ module.exports = {
         //    }
         // });
 
-        if (user.pushToken) {
+        if (user.pushToken.length > 0) {
 
             const headers = {
                 host: 'exp.host',
@@ -284,7 +284,7 @@ module.exports = {
             const data = {
                 "to": user.pushToken,
                 "sound": "default",
-                "title":"Novo Agendamento em " + estab.nome +  " ✔",
+                "title":"Agendamento confirmado (" + estab.nome +  ") ✔",
                 "body": user.nome + " agendado para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora,
                 "_displayInForeground": "true"
             }
