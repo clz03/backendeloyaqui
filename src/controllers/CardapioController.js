@@ -29,7 +29,7 @@ module.exports = {
     },
 
     store(req, res) {
-        const { categoria, item, descr,valor, tseg, tter, tqua, tqui, tsex, tsab, tdom, tmeia, compl1, compl2, compl3, idestabelecimento } = req.body;
+        const { categoria, item, descr,valor, tseg, tter, tqua, tqui, tsex, tsab, tdom, tmeia, compl1, compl2, compl3, adit1, adit2, adit3, idestabelecimento } = req.body;
 
         const returnPost = Cardapio.create({
             categoria,
@@ -47,6 +47,9 @@ module.exports = {
             compl1,
             compl2,
             compl3,
+            adit1,
+            adit2,
+            adit3,
             idestabelecimento
         });
 

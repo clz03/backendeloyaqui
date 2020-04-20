@@ -154,7 +154,7 @@ module.exports = {
         //     }
         // }
         
-        //Horarios livers ja informando quais estão ocupados
+        //Horarios livres ja informando quais estão ocupados
         for (var i = returnSlots.hrinicio; i <= returnSlots.hrfim; i++) {
             status = jsonEventos.includes(parseInt(i)) ? 'I' : 'D';
             jsonArr.push({
@@ -211,66 +211,66 @@ module.exports = {
         const user = await Usuario.findById({ _id: idusuario });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
 
-        let transporter = nodemailer.createTransport({
-            host: "smtp.mailtrap.io",
-            port: 2525,
-            auth: {
-                user: "cb617fac631548",
-                pass: "e6242a10de30be"
-            }
-        });
+        // let transporter = nodemailer.createTransport({
+        //     host: "smtp.mailtrap.io",
+        //     port: 2525,
+        //     auth: {
+        //         user: "cb617fac631548",
+        //         pass: "e6242a10de30be"
+        //     }
+        // });
 
-        const options = {
-            viewEngine: {
-              extName: ".handlebars",
-              partialsDir: './views/',
-              defaultLayout: false
-            },
-            viewPath: './views/',
-            extName: ".handlebars"
-        };
+        // const options = {
+        //     viewEngine: {
+        //       extName: ".handlebars",
+        //       partialsDir: './views/',
+        //       defaultLayout: false
+        //     },
+        //     viewPath: './views/',
+        //     extName: ".handlebars"
+        // };
 
-        transporter.use('compile',hbs(options));
+        // transporter.use('compile',hbs(options));
 
-        await transporter.sendMail({
-            from: '"EloyAqui" <noreply@eloyaqui.com.br>',
-            to: user.email,
-            subject: 'Novo Agendamento realizado com sucesso ✔',
-            text: 'Novo agendamento realizado com sucesso', 
-            template: 'agendamento',
-            context: {
-                nome : user.nome,
-                estabelecimento: estab.nome,
-                rua: estab.rua,
-                numero: estab.numero,
-                telefone: estab.fone1,
-                telefone2: estab.fone2,
-                data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
-                hora: hora,
-                support_email:'mailto:suporte@eloyaqui.com.br',
-                whatsapp: '1197602-3836'
-           }
-        });
+        // await transporter.sendMail({
+        //     from: '"EloyAqui" <noreply@eloyaqui.com.br>',
+        //     to: user.email,
+        //     subject: 'Novo Agendamento realizado com sucesso ✔',
+        //     text: 'Novo agendamento realizado com sucesso', 
+        //     template: 'agendamento',
+        //     context: {
+        //         nome : user.nome,
+        //         estabelecimento: estab.nome,
+        //         rua: estab.rua,
+        //         numero: estab.numero,
+        //         telefone: estab.fone1,
+        //         telefone2: estab.fone2,
+        //         data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
+        //         hora: hora,
+        //         support_email:'mailto:suporte@eloyaqui.com.br',
+        //         whatsapp: '1197602-3836'
+        //    }
+        // });
 
-        await transporter.sendMail({
-            from: '"EloyAqui" <noreply@eloyaqui.com.br>',
-            to: estab.email,
-            subject: 'Novo Agendamento em seu estabelecimento ✔',
-            text: 'Novo agendamento realizado com sucesso', 
-            template: 'agendamento2',
-            context: {
-                nome : user.nome,
-                estabelecimento: estab.nome,
-                rua: estab.rua,
-                numero: estab.numero,
-                telefone: user.telefone,
-                email: user.email,
-                data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
-                hora: hora,
-                support_email:'mailto:suporte@eloyaqui.com.br',
-                whatsapp: '1197602-3836'
-           }
-        });
+        // await transporter.sendMail({
+        //     from: '"EloyAqui" <noreply@eloyaqui.com.br>',
+        //     to: estab.email,
+        //     subject: 'Novo Agendamento em seu estabelecimento ✔',
+        //     text: 'Novo agendamento realizado com sucesso', 
+        //     template: 'agendamento2',
+        //     context: {
+        //         nome : user.nome,
+        //         estabelecimento: estab.nome,
+        //         rua: estab.rua,
+        //         numero: estab.numero,
+        //         telefone: user.telefone,
+        //         email: user.email,
+        //         data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
+        //         hora: hora,
+        //         support_email:'mailto:suporte@eloyaqui.com.br',
+        //         whatsapp: '1197602-3836'
+        //    }
+        // });
 
         if (user.pushToken) {
 
@@ -282,10 +282,10 @@ module.exports = {
             }
 
             const data = {
-                "to": pushUser.pushToken,
+                "to": user.pushToken,
                 "sound": "default",
                 "title":"Novo Agendamento em " + estab.nome +  " ✔",
-                "body": user.nome + " agendou para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora,
+                "body": user.nome + " agendado para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora,
                 "_displayInForeground": "true"
             }
 

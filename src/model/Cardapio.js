@@ -65,6 +65,15 @@ const CardapioSchema = new Schema({
     compl3: {
         type: String
     },
+    adit1: {
+        type: Number
+    },
+    adit2: {
+        type: Number
+    },
+    adit3: {
+        type: Number
+    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
