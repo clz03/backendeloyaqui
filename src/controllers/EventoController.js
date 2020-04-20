@@ -2,6 +2,7 @@ const Evento = require('../model/Evento');
 const Usuario = require('../model/Usuario');
 const Estabelecimento = require('../model/Estabelecimento');
 const Servico = require('../model/Servico');
+const axios = require('axios')
 const nodemailer = require('nodemailer');
 const hbs = require('nodemailer-express-handlebars');
 
@@ -197,9 +198,9 @@ module.exports = {
         const { data, hora, comentario, idestabelecimento, idservico ,idusuario } = req.body;
 
         const returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
-        if(returnEventos.length > 0) return res.json(false);
+        //if(returnEventos.length > 0) return res.json(false);
 
-        const returnPost = Evento.create({
+        const returnPost = await Evento.create({
             data,
             hora,
             comentario,
@@ -285,15 +286,16 @@ module.exports = {
             const datastore = {
                 "to": user.pushToken,
                 "sound": "default",
-                "title":"Agendamento confirmado (" + estab.nome +  ") ✔",
-                "body": user.nome + " agendado para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora,
+                "title":"Agendamento realizado! ✔",
+                "body": "Agendado em " + estab.nome +" no dia " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
                 "_displayInForeground": "true"
             }
 
             //Envia push notification para o mobile
             axios.post('https://exp.host/--/api/v2/push/send', datastore, {
                 headers: headers
-            })
+            });
+            
         };
 
 
