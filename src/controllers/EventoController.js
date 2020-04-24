@@ -124,10 +124,15 @@ module.exports = {
         var jsonArr = [];
         var jsonEventos = [];
         var status;
-        var returnEventos
-        
-        const returnSlots = await Servico.findById({ _id: req.params.servico });
+        var returnEventos;
 
+        var hoje = new Date();
+        var horahoje = hoje.getHours(); // 14
+        hoje.setHours(0,0,0,0);
+
+        var hojeparam = new Date(req.params.data);
+
+        const returnSlots = await Servico.findById({ _id: req.params.servico });
 
 
         if(returnSlots.markIndisp === true){
@@ -140,8 +145,20 @@ module.exports = {
         if (returnEventos.length > 0){
             for(var i = 0; i < returnEventos.length; i++) {
                 jsonEventos[i] = returnEventos[i].hora;
-            }
+            };
+        };
+
+        console.log(jsonEventos.length);
+
+        //somente no dia corrente eliminar horarios ja passados
+        if(hojeparam.getUTCDate() == hoje.getUTCDate()){
+            for(var i = 0; i <= horahoje; i++) {
+                if(!jsonEventos.includes(i)) {
+                    jsonEventos.push(i);
+                }
+            };
         }
+        console.log(jsonEventos.length);
 
         // if(diasemana == 0){
         //     if(returnSlots.hrinicio_domingo > 0){
