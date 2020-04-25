@@ -245,11 +245,11 @@ module.exports = {
             returnEventos3 = await Evento.find({ data: data, idservico: idservico, idusuario: idusuario});
 
 
-        if(returnEventos.length > 0) return res.status(401).send('Horario já preenchido');
+        if(returnEventos.length > 0) return res.status(401).send({message: 'Horario já preenchido'});
         if(!user.admin)
-            if(returnEventos2.length > 0) return res.status(401).send('Você já possui esse horário agendado em outro estabelecimento');
+            if(returnEventos2.length > 0) return res.status(401).send({message:'Você já possui esse horário agendado em outro estabelecimento'});
         if(!user.admin)
-            if(returnEventos3.length > 0) return res.status(401).send('Você já possui agendamento para hoje nesse estabelecimento');
+            if(returnEventos3.length > 0) return res.status(401).send({message:'Você já possui agendamento para hoje nesse estabelecimento'});
 
         const returnPost = await Evento.create({
             data,
