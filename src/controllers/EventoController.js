@@ -44,7 +44,7 @@ module.exports = {
             })
             .populate('idusuario')
             .populate('idservico')
-            .sort({data: -1, hora: -1});
+            .sort({data: -1, hora: 1});
 
         return res.json(returnShow);
     },
