@@ -236,21 +236,21 @@ module.exports = {
             returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico});
         };
 
+        if(returnEventos.length > 0) return res.status(400).send({error: 'Horario já preenchido'});
+
         //Caso o usuario ja tenha horario marcado em outro estab, porém nao é o admin
-        if(!user.admin)
+        if(!user.admin){
             returnEventos2 = await Evento.find({ data: data, hora: hora, idusuario: idusuario});
+            if(returnEventos2.length > 0) return res.status(400).send({error:'Você já possui esse horário agendado em outro estabelecimento'});
+        };
 
         //Caso o usuario ja tenha horario marcado no estab para o mesmo dia, porém nao é o admin
-        if(!user.admin)
+        if(!user.admin){
             returnEventos3 = await Evento.find({ data: data, idservico: idservico, idusuario: idusuario});
+            if(returnEventos3.length > 0) return res.status(400).send({error:'Você já possui agendamento para hoje nesse estabelecimento'});
+        };
 
-
-        if(returnEventos.length > 0) return res.status(401).send({message: 'Horario já preenchido'});
-        if(!user.admin)
-            if(returnEventos2.length > 0) return res.status(401).send({message:'Você já possui esse horário agendado em outro estabelecimento'});
-        if(!user.admin)
-            if(returnEventos3.length > 0) return res.status(401).send({message:'Você já possui agendamento para hoje nesse estabelecimento'});
-
+  
         const returnPost = await Evento.create({
             data,
             hora,
