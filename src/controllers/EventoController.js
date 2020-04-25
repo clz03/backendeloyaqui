@@ -227,13 +227,29 @@ module.exports = {
         var returnEventos;
         
         const returnServico = await Servico.findById({ _id: idservico});
+        const user = await Usuario.findById({ _id: idusuario });
+
+        //Caso o horario esteja preenchido / Else se estiver marcado o flag MarkIndisp = False nao valida o usuario
         if(!returnServico.markIndisp){
             returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
         } else {
             returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico});
-        }
+        };
 
-        if(returnEventos.length > 0) return res.status(401);
+        //Caso o usuario ja tenha horario marcado em outro estab, porém nao é o admin
+        if(!user.admin)
+            returnEventos2 = await Evento.find({ data: data, hora: hora, idusuario: idusuario});
+
+        //Caso o usuario ja tenha horario marcado no estab para o mesmo dia, porém nao é o admin
+        if(!user.admin)
+            returnEventos3 = await Evento.find({ data: data, idservico: idservico, idusuario: idusuario});
+
+
+        if(returnEventos.length > 0) return res.status(401).send('Horario já preenchido');
+        if(!user.admin)
+            if(returnEventos2.length > 0) return res.status(401).send('Você já possui esse horário agendado em outro estabelecimento');
+        if(!user.admin)
+            if(returnEventos3.length > 0) return res.status(401).send('Você já possui agendamento para hoje nesse estabelecimento');
 
         const returnPost = await Evento.create({
             data,
@@ -244,7 +260,7 @@ module.exports = {
             idusuario
         });
 
-        const user = await Usuario.findById({ _id: idusuario });
+        //const user = await Usuario.findById({ _id: idusuario });
         const userEstab = await Usuario.find({ idestabelecimento: idestabelecimento });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
 
