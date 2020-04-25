@@ -43,7 +43,8 @@ module.exports = {
             } 
             })
             .populate('idusuario')
-            .populate('idservico');
+            .populate('idservico')
+            .sort({data: -1});
 
         return res.json(returnShow);
     },
