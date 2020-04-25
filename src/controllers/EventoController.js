@@ -3,8 +3,9 @@ const Usuario = require('../model/Usuario');
 const Estabelecimento = require('../model/Estabelecimento');
 const Servico = require('../model/Servico');
 const axios = require('axios')
-const nodemailer = require('nodemailer');
-const hbs = require('nodemailer-express-handlebars');
+//const nodemailer = require('nodemailer');
+//const hbs = require('nodemailer-express-handlebars');
+const { findConnections, sendMessage } = require('../websocket')
 
 module.exports = {
 
@@ -148,8 +149,6 @@ module.exports = {
             };
         };
 
-        console.log(jsonEventos.length);
-
         //somente no dia corrente eliminar horarios ja passados
         if(hojeparam.getUTCDate() == hoje.getUTCDate()){
             for(var i = 0; i <= horahoje; i++) {
@@ -158,7 +157,6 @@ module.exports = {
                 }
             };
         }
-        console.log(jsonEventos.length);
 
         // if(diasemana == 0){
         //     if(returnSlots.hrinicio_domingo > 0){
@@ -209,15 +207,32 @@ module.exports = {
     },
 
     async delete(req, res){
+
+        const returnEvento = await Evento.findById({ _id: req.params.id });
+        const idestabelecimento = returnEvento.idestabelecimento;
+
         const returnDel = await Evento.deleteOne({ _id: req.params.id });
-        return res.json(returnDel)
+
+         //Envia reload para o mobile-end
+        const sendSocketMessageTo = findConnections(idestabelecimento);
+        sendMessage(sendSocketMessageTo, 'novo-agenda', 'status');
+
+        return res.json(returnDel);
     },
 
     async store(req, res) {
         const { data, hora, comentario, idestabelecimento, idservico ,idusuario } = req.body;
+        
+        var returnEventos;
+        
+        const returnServico = await Servico.findById({ _id: idservico});
+        if(!returnServico.markIndisp){
+            returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
+        } else {
+            returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico});
+        }
 
-        const returnEventos = await Evento.find({ data: data, hora: hora, idservico: idservico, idusuario: idusuario});
-        if(returnEventos.length > 0) return res.json(false);
+        if(returnEventos.length > 0) return res.status(401);
 
         const returnPost = await Evento.create({
             data,
@@ -231,68 +246,6 @@ module.exports = {
         const user = await Usuario.findById({ _id: idusuario });
         const userEstab = await Usuario.find({ idestabelecimento: idestabelecimento });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
-
-        // let transporter = nodemailer.createTransport({
-        //     host: "smtp.mailtrap.io",
-        //     port: 2525,
-        //     auth: {
-        //         user: "cb617fac631548",
-        //         pass: "e6242a10de30be"
-        //     }
-        // });
-
-        // const options = {
-        //     viewEngine: {
-        //       extName: ".handlebars",
-        //       partialsDir: './views/',
-        //       defaultLayout: false
-        //     },
-        //     viewPath: './views/',
-        //     extName: ".handlebars"
-        // };
-
-        // transporter.use('compile',hbs(options));
-
-        // await transporter.sendMail({
-        //     from: '"EloyAqui" <noreply@eloyaqui.com.br>',
-        //     to: user.email,
-        //     subject: 'Novo Agendamento realizado com sucesso ✔',
-        //     text: 'Novo agendamento realizado com sucesso', 
-        //     template: 'agendamento',
-        //     context: {
-        //         nome : user.nome,
-        //         estabelecimento: estab.nome,
-        //         rua: estab.rua,
-        //         numero: estab.numero,
-        //         telefone: estab.fone1,
-        //         telefone2: estab.fone2,
-        //         data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
-        //         hora: hora,
-        //         support_email:'mailto:suporte@eloyaqui.com.br',
-        //         whatsapp: '1197602-3836'
-        //    }
-        // });
-
-        // await transporter.sendMail({
-        //     from: '"EloyAqui" <noreply@eloyaqui.com.br>',
-        //     to: estab.email,
-        //     subject: 'Novo Agendamento em seu estabelecimento ✔',
-        //     text: 'Novo agendamento realizado com sucesso', 
-        //     template: 'agendamento2',
-        //     context: {
-        //         nome : user.nome,
-        //         estabelecimento: estab.nome,
-        //         rua: estab.rua,
-        //         numero: estab.numero,
-        //         telefone: user.telefone,
-        //         email: user.email,
-        //         data: data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4),
-        //         hora: hora,
-        //         support_email:'mailto:suporte@eloyaqui.com.br',
-        //         whatsapp: '1197602-3836'
-        //    }
-        // });
-
 
         if (user.pushToken.length > 0) {
 
@@ -341,6 +294,10 @@ module.exports = {
             });
             
         };
+
+        //Envia reload para o mobile-end
+        const sendSocketMessageTo = findConnections(idestabelecimento);
+        sendMessage(sendSocketMessageTo, 'novo-agenda', 'status');
 
 
         return res.json(returnPost);

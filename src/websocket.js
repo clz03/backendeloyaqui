@@ -21,6 +21,7 @@ exports.setupWebsocket = (server) => {
             idusuario: idusuario
         });
     });
+
 };
 
 exports.findConnections = (idestab) => {
@@ -37,6 +38,7 @@ exports.findConnectionsUser = (idusuario) => {
 
 exports.sendMessage = (to, message, data) => {
     to.forEach(connection => {
+        //console.log(connection.id);
         io.to(connection.id).emit(message,data);
     });
 }
