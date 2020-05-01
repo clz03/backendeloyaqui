@@ -78,7 +78,7 @@ module.exports = {
             from: '"EloyAqui" <noreply@eloyaqui.com.br>',
             to: email,
             subject: 'Redefinição da sua senha ✔',
-            text: 'Redefina sua senha', 
+            text: 'Redefina sua senha aqui', 
             template: 'forgotpwd',
             context: {
                 nome : user.nome,
