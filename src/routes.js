@@ -17,6 +17,7 @@ const EnderecoController = require('./controllers/EnderecoController.js');
 const PedidoController = require('./controllers/PedidoController.js');
 const ItensPedidoController = require('./controllers/ItensPedidoController.js');
 const NumeroPedidoController = require('./controllers/NumeroPedidoController.js');
+const FeriadoController = require('./controllers/FeriadoController.js');
 
 const routes = express.Router();
 
@@ -154,5 +155,11 @@ routes.get('/numeropedido', NumeroPedidoController.index);
 routes.get('/numeropedido/:id', NumeroPedidoController.show);
 routes.put('/numeropedido/:id', NumeroPedidoController.update);
 routes.delete('/numeropedido/:id', NumeroPedidoController.delete);
+
+routes.post('/feriados', FeriadoController.store);
+routes.get('/feriados', FeriadoController.index);
+routes.get('/feriados/:id', FeriadoController.show);
+routes.put('/feriados/:id', FeriadoController.update);
+routes.delete('/feriados/:id', FeriadoController.delete);
 
 module.exports = routes;
