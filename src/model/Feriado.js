@@ -4,7 +4,7 @@ const FeriadoSchema = new Schema({
     data: {
         type: Date,
         required: true
-    },
+    }
 }, {
     timestamps: true
 });
