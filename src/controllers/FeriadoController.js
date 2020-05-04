@@ -31,5 +31,4 @@ module.exports = {
 
         return res.json(returnPost);
     },
-
 };
