@@ -70,7 +70,8 @@ module.exports = {
             { agendamento: '1',  $or: [ 
                     {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
                     {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
-                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
+                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
+                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
             }
         )
@@ -79,7 +80,8 @@ module.exports = {
             { agendamento: '1', $or: [ 
                     {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}, 
                     {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
-                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
+                    {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
+                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
             }
         )
@@ -122,7 +124,8 @@ module.exports = {
             {  $or: [ 
                     {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
                     {tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
-                    {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
+                    {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
+                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
             }
         )
@@ -131,7 +134,8 @@ module.exports = {
             {  $or: [ 
                     {nome: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}, 
                     {tipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
-                    {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
+                    {subtipo: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }},
+                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
                 ]
             }
         )
@@ -158,7 +162,7 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, complemento, fone1, fone2, agendamento, cardapio, delivery ,plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo, pedidominimo, taxaentrega, tempoentrega, temporetira, entrega, retira, idcategoria } = req.body;
+        const { nome, descr, tipo, subtipo, imagemcapa, imagem, rua, numero, bairro, cep, complemento, fone1, fone2, agendamento, cardapio, delivery ,plano, email, facebook, instagram, whatsapp, hrinicio_semana, hrfim_semana, hrinicio_sabado, hrfim_sabado, hrinicio_domingo, hrfim_domingo, pedidominimo, taxaentrega, tempoentrega, temporetira, entrega, retira, enableFeriado, hashtags, idcategoria } = req.body;
 
         const returnPost = Estabelecimento.create({
             nome, 
@@ -194,6 +198,8 @@ module.exports = {
             temporetira,
             entrega,
             retira,
+            enableFeriado,
+            hashtags,
             idcategoria
         });
 

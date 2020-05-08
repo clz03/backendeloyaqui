@@ -210,13 +210,41 @@ module.exports = {
     async delete(req, res){
 
         const returnEvento = await Evento.findById({ _id: req.params.id });
+        const dataEvento = returnEvento.data.toISOString();
+
         const idestabelecimento = returnEvento.idestabelecimento;
+        const userEstab = await Usuario.find({ idestabelecimento: idestabelecimento });
+        const user = await Usuario.findById({ _id: returnEvento.idusuario });
 
         const returnDel = await Evento.deleteOne({ _id: req.params.id });
 
          //Envia reload para o mobile-end
         const sendSocketMessageTo = findConnections(idestabelecimento);
         sendMessage(sendSocketMessageTo, 'novo-agenda', 'status');
+
+        if (userEstab) {
+
+            const headers2 = {
+                host: 'exp.host',
+                Accept: 'application/json',
+                'Accept-encoding': 'gzip, deflate',
+                'Content-Type': 'application/json'
+            }
+
+            const datastore2 = {
+                "to": userEstab[0].pushToken,
+                "sound": "default",
+                "title": "Agendamento cancelado",
+                "body": "Cliente " + user.nome +" cancelou agendamento de " + dataEvento.substring(8,10) + "/" + dataEvento.substring(5,7) + "/" + dataEvento.substring(0,4) + " as " + returnEvento.hora + ":00",
+                "_displayInForeground": "true"
+            }
+
+            //Envia push notification para o mobile
+            axios.post('https://exp.host/--/api/v2/push/send', datastore2, {
+                headers: headers2
+            });
+            
+        };
 
         return res.json(returnDel);
     },
@@ -264,7 +292,7 @@ module.exports = {
         const userEstab = await Usuario.find({ idestabelecimento: idestabelecimento });
         const estab = await Estabelecimento.findById({ _id: idestabelecimento });
 
-        if (user.pushToken.length > 0) {
+        if (user.pushToken) {
 
             const headers = {
                 host: 'exp.host',
@@ -276,7 +304,7 @@ module.exports = {
             const datastore = {
                 "to": user.pushToken,
                 "sound": "default",
-                "title":"Agendamento realizado!",
+                "title":"Seu agendamento foi realizado!",
                 "body": "Agendado em " + estab.nome +" no dia " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
                 "_displayInForeground": "true"
             }
@@ -288,7 +316,7 @@ module.exports = {
             
         };
 
-        if (userEstab.length > 0) {
+        if (userEstab) {
 
             const headers2 = {
                 host: 'exp.host',
@@ -300,7 +328,7 @@ module.exports = {
             const datastore2 = {
                 "to": userEstab[0].pushToken,
                 "sound": "default",
-                "title": "Novo Agendamento " + estab.nome,
+                "title": "Novo Agendamento",
                 "body": "Cliente " + user.nome +" agendou para " + data.substring(8,10) + "/" + data.substring(5,7) + "/" + data.substring(0,4) + " as " + hora + ":00",
                 "_displayInForeground": "true"
             }

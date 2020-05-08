@@ -128,6 +128,13 @@ const EstabelecimentoSchema = new Schema({
     online: {
         type: Boolean
     },
+    enableFeriado: {
+        type: Boolean,
+        default:false
+    },
+    hashtags: {
+        type: String
+    },
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'

@@ -1,10 +1,12 @@
 const Categoria = require('../model/Categoria');
+//const { showConnections } = require('../websocket')
 
 module.exports = {
 
     async index(req, res){
 
         const returnGet = await Categoria.find();
+        //showConnections();
         return res.json(returnGet)
     },
 

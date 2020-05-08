@@ -1,4 +1,5 @@
 const Feriado = require('../model/Feriado');
+const Estabelecimento = require('../model/Estabelecimento');
 
 module.exports = {
 
@@ -7,9 +8,17 @@ module.exports = {
         return res.json(returnGet)
     },
 
-    async show(req, res){
-        const returnShow = await Feriado.find({ _id: req.params.id });
-        return res.json(returnShow)
+    async showByEstabFlag(req, res){
+        var returnGet;
+        const returnEstab = await Estabelecimento.findById({_id: req.params.idestabelecimento});
+
+        if(returnEstab.enableFeriado){
+            returnGet = {};
+        } else {
+            returnGet = await Feriado.find();
+        };
+        
+        return res.json(returnGet)
     },
 
     async update(req, res){

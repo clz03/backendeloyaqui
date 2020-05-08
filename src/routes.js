@@ -158,7 +158,7 @@ routes.delete('/numeropedido/:id', NumeroPedidoController.delete);
 
 routes.post('/feriados', FeriadoController.store);
 routes.get('/feriados', FeriadoController.index);
-routes.get('/feriados/:id', FeriadoController.show);
+routes.get('/feriados/:idestabelecimento', FeriadoController.showByEstabFlag);
 routes.put('/feriados/:id', FeriadoController.update);
 routes.delete('/feriados/:id', FeriadoController.delete);
 

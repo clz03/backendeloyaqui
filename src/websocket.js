@@ -24,15 +24,22 @@ exports.setupWebsocket = (server) => {
 
 };
 
+exports.showConnections = () => {
+    connections.map(connection => {
+        console.log(connection.id);
+    })
+};
+
 exports.findConnections = (idestab) => {
     return connections.filter(connection => {
-        return idestab === connection.idestab
+        //console.log(connection.idestab);
+        return idestab == connection.idestab
     })
 };
 
 exports.findConnectionsUser = (idusuario) => {
     return connections.filter(connection => {
-        return idusuario === connection.idusuario
+        return idusuario == connection.idusuario
     })
 };
 
