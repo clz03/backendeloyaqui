@@ -71,7 +71,7 @@ module.exports = {
                     {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
                     {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
                     {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
-                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
+                    {hashtags: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
                 ]
             }
         )
@@ -81,7 +81,7 @@ module.exports = {
                     {nome: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}, 
                     {tipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
                     {subtipo: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }},
-                    {hashtags: { $regex: '.*' + req.params.nome + '.*', $options: 'i' }}
+                    {hashtags: { $regex: '.*' + req.params.busca + '.*', $options: 'i' }}
                 ]
             }
         )
