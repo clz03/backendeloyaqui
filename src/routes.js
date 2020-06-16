@@ -39,6 +39,7 @@ routes.post('/estabelecimentos', EstabelecimentoController.store);
 routes.get('/estabelecimentos', EstabelecimentoController.index);
 routes.get('/estabelecimentos/Todos', EstabelecimentoController.showAll);
 routes.get('/estabelecimentos/:id', EstabelecimentoController.show);
+routes.get('/estabelecimentos_adm/:id', EstabelecimentoController.show_adm);
 routes.get('/estabelecimentos/categoria/:id', EstabelecimentoController.showbycat);
 routes.get('/estabelecimentos/busca/:nome', EstabelecimentoController.showbysearch);
 routes.get('/estabelecimentos/com/agendamento/habilitado', EstabelecimentoController.showbyagenda);

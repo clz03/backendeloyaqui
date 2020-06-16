@@ -23,6 +23,11 @@ module.exports = {
         return res.json(returnShow);
     },
 
+    async show_adm(req, res){
+        const returnShow = await Estabelecimento.find({ _id: req.params.id });
+        return res.json(returnShow);
+    },
+
     async showbycat(req, res){
         const pagination = req.query.pagination ? parseInt(req.query.pagination) : 10;
         const page = req.query.page ? parseInt(req.query.page) : 1;
