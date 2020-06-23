@@ -18,6 +18,7 @@ const PedidoController = require('./controllers/PedidoController.js');
 const ItensPedidoController = require('./controllers/ItensPedidoController.js');
 const NumeroPedidoController = require('./controllers/NumeroPedidoController.js');
 const FeriadoController = require('./controllers/FeriadoController.js');
+const ProfissionalController = require('./controllers/ProfissionalController.js');
 
 const routes = express.Router();
 
@@ -64,6 +65,7 @@ routes.delete('/produtos/:id', ProdutoController.delete);
 routes.post('/servicos', ServicoController.store);
 routes.get('/servicos', ServicoController.index);
 routes.get('/servicos/:id', ServicoController.show);
+routes.get('/servicos/profissional/:id', ServicoController.showbyprof);
 routes.get('/servicos/estabelecimento/:id', ServicoController.showbyestab);
 routes.put('/servicos/:id', ServicoController.update);
 routes.delete('/servicos/:id', ServicoController.delete);
@@ -91,7 +93,7 @@ routes.get('/eventos', EventoController.index);
 routes.get('/eventos/:id', EventoController.show);
 routes.get('/eventos/estabelecimento/:estab/:mes', EventoController.showbyestab);
 routes.get('/eventos/usuario/:idusuario', EventoController.showbyuser);
-routes.get('/eventos/dia/:data/:servico', EventoController.showbyday);
+routes.get('/eventos/dia/:data/:profissional', EventoController.showbyday);
 routes.put('/eventos/:id', EventoController.update);
 routes.delete('/eventos/:id', EventoController.delete);
 
@@ -162,5 +164,12 @@ routes.get('/feriados', FeriadoController.index);
 routes.get('/feriados/:idestabelecimento', FeriadoController.showByEstabFlag);
 routes.put('/feriados/:id', FeriadoController.update);
 routes.delete('/feriados/:id', FeriadoController.delete);
+
+routes.post('/profissional', ProfissionalController.store);
+routes.get('/profissional', ProfissionalController.index);
+routes.get('/profissional/:id', ProfissionalController.show);
+routes.get('/profissional/estabelecimento/:id', ProfissionalController.showbyestab);
+routes.put('/profissional/:id', ProfissionalController.update);
+routes.delete('/profissional/:id', ProfissionalController.delete);
 
 module.exports = routes;

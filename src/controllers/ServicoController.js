@@ -14,7 +14,13 @@ module.exports = {
     },
 
     async showbyestab(req, res){
-        const returnShow = await Servico.find({ idestabelecimento: req.params.id });
+        const returnShow = await Servico.find({ idestabelecimento: req.params.id })
+        .populate('idprofissional');
+        return res.json(returnShow)
+    },
+
+    async showbyprof(req, res){
+        const returnShow = await Servico.find({ idprofissional: req.params.id });
         return res.json(returnShow)
     },
 
@@ -31,18 +37,14 @@ module.exports = {
 
     store(req, res) {
 
-        const { nome, descr, preco, imagem, promocao, diasemana, hrinicio, hrfim, idestabelecimento } = req.body;
+        const { nome, descr, preco, idestabelecimento, idprofissional } = req.body;
 
         const returnPost = Servico.create({
             nome, 
             descr,
             preco, 
-            imagem, 
-            promocao,
-            diasemana,
-            hrinicio,
-            hrfim,
-            idestabelecimento
+            idestabelecimento,
+            idprofissional
         });
 
         return res.json(returnPost);

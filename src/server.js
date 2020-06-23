@@ -4,6 +4,7 @@ const routes = require('./routes');
 const cors = require('cors');
 const http = require('http');
 const { setupWebsocket } = require('./websocket');
+require('dotenv').config();
 
 const app = express();
 const server = http.Server(app);

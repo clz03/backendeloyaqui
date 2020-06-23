@@ -12,24 +12,6 @@ const ServicoSchema = new Schema({
     preco: {
         type: String
     },
-    imagem: {
-        type: String
-    },
-    promocao: {
-        type: Boolean
-    },
-    diasemana: {
-        type: Array,
-        required: true
-    },
-    hrinicio: {
-        type: String,
-        required: true
-    },
-    hrfim: {
-        type: String,
-        required: true
-    },
     markIndisp: {
         type: Boolean,
         required: true,
@@ -38,6 +20,10 @@ const ServicoSchema = new Schema({
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
+    },
+    idprofissional: {
+        type: Schema.Types.ObjectId,
+        ref: 'Profissional'
     }
 }, {
     timestamps: true

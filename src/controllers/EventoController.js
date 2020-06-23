@@ -134,11 +134,11 @@ module.exports = {
 
         var hojeparam = new Date(req.params.data);
 
-        const returnSlots = await Servico.findById({ _id: req.params.servico });
+        const returnSlots = await Servico.find({ idprofissional: req.params.profissional });
 
 
         if(returnSlots.markIndisp === true){
-            returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.servico });
+            returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.profissional });
         } else {
             returnEventos = '';
         }
