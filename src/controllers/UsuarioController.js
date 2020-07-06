@@ -132,6 +132,11 @@ module.exports = {
         return res.json(returnShow)
     },
 
+    async showbyPhone(req, res){
+        const returnShow = await Usuario.findOne({ telefone: req.params.telefone });
+        return res.json(returnShow)
+    },
+
     async update(req, res){
         const returnUpdate = await Usuario.updateOne({ _id: req.params.id },req.body);
         return res.json(returnUpdate)

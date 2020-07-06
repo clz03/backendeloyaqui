@@ -13,6 +13,11 @@ const ProfissionalSchema = new Schema({
         type: String,
         required: true
     },
+    markIndisp: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
     diasemana: {
         type: Array,
         required: true

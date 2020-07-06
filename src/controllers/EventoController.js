@@ -2,6 +2,7 @@ const Evento = require('../model/Evento');
 const Usuario = require('../model/Usuario');
 const Estabelecimento = require('../model/Estabelecimento');
 const Servico = require('../model/Servico');
+const Profissional = require('../model/Profissional');
 const axios = require('axios')
 //const nodemailer = require('nodemailer');
 //const hbs = require('nodemailer-express-handlebars');
@@ -134,11 +135,10 @@ module.exports = {
 
         var hojeparam = new Date(req.params.data);
 
-        const returnSlots = await Servico.find({ idprofissional: req.params.profissional });
-
-
+        const returnSlots = await Profissional.findById({ _id: req.params.profissional });
+        
         if(returnSlots.markIndisp === true){
-            returnEventos = await Evento.find({ data: req.params.data, idservico: req.params.profissional });
+            returnEventos = await Evento.find({ data: req.params.data, idprofissional: req.params.profissional });
         } else {
             returnEventos = '';
         }
@@ -174,8 +174,8 @@ module.exports = {
         // }
 
         //Horarios livres ja informando quais estão ocupados
-        for (var i = parseInt(returnSlots.hrinicio); i <= parseInt(returnSlots.hrfim); i++) {
-            status = jsonEventos.includes(parseInt(i)) ? 'I' : 'D';
+        for (var i = parseInt(returnSlots.hrinicio); i <= parseInt(returnSlots.hrfim); i+=0.5) {
+            status = jsonEventos.includes(i) ? 'I' : 'D';
             jsonArr.push({
                 id: req.params.data + i,
                 data: req.params.data,
@@ -250,7 +250,7 @@ module.exports = {
     },
 
     async store(req, res) {
-        const { data, hora, comentario, idestabelecimento, idservico ,idusuario } = req.body;
+        const { data, hora, comentario, idestabelecimento, idservico ,idprofissional ,idusuario } = req.body;
         
         var returnEventos;
         
@@ -285,6 +285,7 @@ module.exports = {
             comentario,
             idestabelecimento,
             idservico,
+            idprofissional,
             idusuario
         });
 

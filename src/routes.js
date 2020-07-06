@@ -74,6 +74,7 @@ routes.post('/usuarios', UsuarioController.store);
 routes.get('/usuarios', UsuarioController.index);
 routes.get('/usuarios/:id', UsuarioController.show);
 routes.get('/usuarios/email/:email', UsuarioController.showbyEmail);
+routes.get('/usuarios/telefone/:telefone', UsuarioController.showbyPhone);
 routes.post('/authenticate', UsuarioController.authenticate);
 routes.post('/admauthenticate/', UsuarioController.authenticateadmin);
 routes.post('/forgotpwd', UsuarioController.forgotpwd);

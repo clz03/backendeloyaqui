@@ -12,11 +12,6 @@ const ServicoSchema = new Schema({
     preco: {
         type: String
     },
-    markIndisp: {
-        type: Boolean,
-        required: true,
-        default: true
-    },
     idestabelecimento: {
         type: Schema.Types.ObjectId,
         ref: 'Estabelecimento'
