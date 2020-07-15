@@ -87,7 +87,7 @@ module.exports = {
             return res.status(400).send({ error: "Usuário não encontrado" });
 
         let transporter = nodemailer.createTransport({
-            host: "smtp.zoho.com",
+            host: process.env.EMAIL_SMTP,
             port: 587,
             auth: {
                 user: "comercial@eloyaqui.com.br",
@@ -198,7 +198,7 @@ module.exports = {
         // });
 
         let transporter = nodemailer.createTransport({
-            host: "smtp.zoho.com",
+            host: process.env.EMAIL_SMTP,
             port: 587,
             auth: {
                 user: "comercial@eloyaqui.com.br",
