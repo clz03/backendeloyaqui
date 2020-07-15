@@ -62,6 +62,8 @@ module.exports = {
             idestabelecimento
         });
 
+        // Enviar push notification para os usuarios cadastrados sobre novo cupom
+
         return res.json(returnPost);
     }
 };

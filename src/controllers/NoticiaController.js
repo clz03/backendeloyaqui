@@ -49,6 +49,8 @@ module.exports = {
             imagem
         });
 
+        //Enviar Push Notification com nova noticia a todos os usuarios cadastrados
+
         return res.json(returnPost);
     }
 };
