@@ -135,6 +135,9 @@ const EstabelecimentoSchema = new Schema({
     hashtags: {
         type: String
     },
+    identifier: {
+        type: String,
+    },
     idcategoria: [{
         type: Schema.Types.ObjectId,
         ref: 'Categoria'

@@ -23,6 +23,11 @@ module.exports = {
         return res.json(returnShow);
     },
 
+    async showbyIdentifier(req, res){
+        const returnShow = await Estabelecimento.findOne({ identifier: req.params.identifier });
+        return res.json(returnShow);
+    },
+
     async show_adm(req, res){
         const returnShow = await Estabelecimento.find({ _id: req.params.id });
         return res.json(returnShow);
