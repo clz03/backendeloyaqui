@@ -145,14 +145,14 @@ module.exports = {
 
         //Horarios já preenchidos nesse dia
         if (returnEventos.length > 0){
-            for(var i = 0; i < returnEventos.length; i+=0.5) {
+            for(var i = 0; i < returnEventos.length; i++) {
                 jsonEventos[i] = returnEventos[i].hora;
             };
         };
 
         //somente no dia corrente eliminar horarios ja passados
         if(hojeparam.getUTCDate() == hoje.getUTCDate()){
-            for(var i = 0; i <= horahoje; i++) {
+            for(var i = 0; i <= horahoje; i+=0.5) {
                 if(!jsonEventos.includes(i)) {
                     jsonEventos.push(i);
                 }
