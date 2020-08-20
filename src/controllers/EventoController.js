@@ -145,7 +145,7 @@ module.exports = {
 
         //Horarios já preenchidos nesse dia
         if (returnEventos.length > 0){
-            for(var i = 0; i < returnEventos.length; i++) {
+            for(var i = 0; i < returnEventos.length; i+=0.5) {
                 jsonEventos[i] = returnEventos[i].hora;
             };
         };
